@@ -14,6 +14,7 @@
 		3BBD15AB23173D870086757A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BBD15A923173D870086757A /* LaunchScreen.storyboard */; };
 		3BBD15B623173D870086757A /* StoneArtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBD15B523173D870086757A /* StoneArtTests.swift */; };
 		3BBD15C123173D870086757A /* StoneArtUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBD15C023173D870086757A /* StoneArtUITests.swift */; };
+		3BBD15D0231740970086757A /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBD15CF231740970086757A /* SpriteKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		3BBD15BC23173D870086757A /* StoneArtUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StoneArtUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BBD15C023173D870086757A /* StoneArtUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoneArtUITests.swift; sourceTree = "<group>"; };
 		3BBD15C223173D870086757A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3BBD15CF231740970086757A /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BBD15D0231740970086757A /* SpriteKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +84,7 @@
 				3BBD15B423173D870086757A /* StoneArtTests */,
 				3BBD15BF23173D870086757A /* StoneArtUITests */,
 				3BBD159E23173D860086757A /* Products */,
+				3BBD15CE231740970086757A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,6 +127,14 @@
 				3BBD15C223173D870086757A /* Info.plist */,
 			);
 			path = StoneArtUITests;
+			sourceTree = "<group>";
+		};
+		3BBD15CE231740970086757A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3BBD15CF231740970086757A /* SpriteKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
