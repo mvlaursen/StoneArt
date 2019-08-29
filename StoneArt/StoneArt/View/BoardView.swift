@@ -10,5 +10,15 @@ import SpriteKit
 import UIKit
 
 class BoardView: SKView {
-
-}
+    class BoardNode: SKSpriteNode {
+    }
+    
+    override func layoutSubviews() {
+        if self.scene == nil {
+            let scene = SKScene(size: self.bounds.size)
+            
+            let board = BoardNode(imageNamed: "GomokuBoard1024")
+            scene.addChild(board)
+            self.presentScene(scene)
+        }
+    }}
