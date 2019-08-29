@@ -77,6 +77,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B43D3C923176023004FDDA0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3BBD15A723173D870086757A /* Assets.xcassets */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		3BBD159423173D860086757A = {
 			isa = PBXGroup;
 			children = (
@@ -101,10 +109,10 @@
 		3BBD159F23173D860086757A /* StoneArt */ = {
 			isa = PBXGroup;
 			children = (
+				3B43D3C923176023004FDDA0 /* View */,
 				3BBD15A023173D860086757A /* AppDelegate.swift */,
 				3BBD15A223173D860086757A /* ViewController.swift */,
 				3BBD15A423173D860086757A /* Main.storyboard */,
-				3BBD15A723173D870086757A /* Assets.xcassets */,
 				3BBD15A923173D870086757A /* LaunchScreen.storyboard */,
 				3BBD15AC23173D870086757A /* Info.plist */,
 			);
