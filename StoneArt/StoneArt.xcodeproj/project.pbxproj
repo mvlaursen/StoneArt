@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B4894CE23188EA8003212F1 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4894CD23188EA8003212F1 /* BoardView.swift */; };
 		3BBD15A123173D860086757A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBD15A023173D860086757A /* AppDelegate.swift */; };
 		3BBD15A323173D860086757A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBD15A223173D860086757A /* ViewController.swift */; };
 		3BBD15A623173D860086757A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BBD15A423173D860086757A /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B4894CD23188EA8003212F1 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		3BBD159D23173D860086757A /* StoneArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoneArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BBD15A023173D860086757A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BBD15A223173D860086757A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +83,9 @@
 			isa = PBXGroup;
 			children = (
 				3BBD15A723173D870086757A /* Assets.xcassets */,
+				3BBD15A923173D870086757A /* LaunchScreen.storyboard */,
+				3BBD15A423173D860086757A /* Main.storyboard */,
+				3B4894CD23188EA8003212F1 /* BoardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -109,12 +114,10 @@
 		3BBD159F23173D860086757A /* StoneArt */ = {
 			isa = PBXGroup;
 			children = (
-				3B43D3C923176023004FDDA0 /* View */,
 				3BBD15A023173D860086757A /* AppDelegate.swift */,
-				3BBD15A223173D860086757A /* ViewController.swift */,
-				3BBD15A423173D860086757A /* Main.storyboard */,
-				3BBD15A923173D870086757A /* LaunchScreen.storyboard */,
 				3BBD15AC23173D870086757A /* Info.plist */,
+				3BBD15A223173D860086757A /* ViewController.swift */,
+				3B43D3C923176023004FDDA0 /* View */,
 			);
 			path = StoneArt;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B4894CE23188EA8003212F1 /* BoardView.swift in Sources */,
 				3BBD15A323173D860086757A /* ViewController.swift in Sources */,
 				3BBD15A123173D860086757A /* AppDelegate.swift in Sources */,
 			);
@@ -455,7 +459,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NM9E6W7574;
 				INFOPLIST_FILE = StoneArt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -474,7 +478,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NM9E6W7574;
 				INFOPLIST_FILE = StoneArt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
