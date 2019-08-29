@@ -1,4 +1,3 @@
-We want to be able to support a iPod touch (6th generation), which has a logical screen resolution of 320 x 568 with @2x scale factor. This is similar to the screens on iPhone SE, 5, 5s, 5c.
-
+We wanted to be able to support a iPod touch (6th generation), which has a logical screen resolution of 320 x 568 with @2x scale factor. This is similar to the screens on iPhone SE, 5, 5s, 5c. It turns out that SpriteKit doesn't work on iOS 9.x because of a bug in NSCoding, so we cannot support iPod.
 
 iOS device resolution reference: https://iosref.com/res/
