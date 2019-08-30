@@ -10,6 +10,9 @@ import SpriteKit
 import UIKit
 
 class BoardView: SKView {
+    static let kBoardZPosition = CGFloat(100.0)
+    static let kSquaresPerDim = 15
+
     struct BoardMetrics {
         let boardImageName: String
         let squareDim: CGFloat
@@ -44,8 +47,28 @@ class BoardView: SKView {
             let metrics = BoardView.boardMetrics()
             let scene = SKScene(size: self.bounds.size)
             
+            // To make conversion from the location of a tap in the scene's
+            // coordinate system to board row and column as straightforward as
+            // possible, align row 0, column 0 of the board image with the
+            // scene's origin. There is still the difference that the scene's
+            // y-axis points up while row numbers increase from top to bottom
+            // of the board, but aligning row 0 with y = 0 allows us to simply
+            // negate the value of y when converting.
+            
             let board = BoardNode(imageNamed: metrics.boardImageName)
+            
+            let squareDimInUnitSpace = 1.0 / CGFloat(BoardView.kSquaresPerDim + 1)
+            board.anchorPoint = CGPoint(x: squareDimInUnitSpace, y: 1.0 - squareDimInUnitSpace)
+            
+            // If our collection of artwork is done correctly, the board images
+            // always fit within the available screen space.
+            let xMargin = (scene.size.width - board.size.width) / 2.0
+            let yMargin = (scene.size.height - board.size.height) / 2.0
+            board.position = CGPoint(x: xMargin + metrics.squareDim, y: yMargin + CGFloat(BoardView.kSquaresPerDim) * metrics.squareDim)
+            board.zPosition = BoardView.kBoardZPosition
+            
             scene.addChild(board)
+            
             self.presentScene(scene)
         }
     }}
