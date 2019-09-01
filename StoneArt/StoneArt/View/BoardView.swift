@@ -46,6 +46,7 @@ class BoardView: SKView {
         if self.scene == nil {
             let metrics = BoardView.boardMetrics()
             let scene = SKScene(size: self.bounds.size)
+            scene.backgroundColor = SKColor.clear
             
             // To make conversion from the location of a tap in the scene's
             // coordinate system to board row and column as straightforward as

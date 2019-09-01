@@ -27,7 +27,7 @@
                                 <color key="textColor" red="1" green="0.8901960784313725" blue="0.070588235294117646" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <skView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWt-LL-KVg" userLabel="Board View" customClass="BoardView" customModule="StoneArt" customModuleProvider="target">
+                            <skView contentMode="center" allowsTransparency="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IWt-LL-KVg" userLabel="Board View" customClass="BoardView" customModule="StoneArt" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="134" width="320" height="320"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="IWt-LL-KVg" secondAttribute="height" multiplier="1:1" id="VRQ-jr-3yh" userLabel="aspect = 1:1"/>
