@@ -19,9 +19,54 @@ class StoneArtTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testGameInit() {
+        let game = Game.init()
+        XCTAssertEqual(game.moves.count, 1)
+        XCTAssertTrue(game.moves[0].squares.allSatisfy({ (square) -> Bool in
+            square == Square.empty
+        }))
+    }
+    
+    func testGameAddMove() {
+        let game = Game.init()
+        game.addMove(index: 0, square: Square.black)
+        game.addMove(index: 1, square: Square.white)
+
+        XCTAssertEqual(game.moves.count, 3)
+
+        XCTAssertTrue(game.moves[0].squares.allSatisfy({ (square) -> Bool in
+            square == Square.empty
+        }))
+        
+        XCTAssertTrue(game.moves[1].squares[0] == Square.black)
+        XCTAssertTrue(game.moves[1].squares[1...].allSatisfy({ (square) -> Bool in
+            square == Square.empty
+        }))
+        
+        XCTAssertTrue(game.moves[2].squares[0] == Square.black)
+        XCTAssertTrue(game.moves[2].squares[1] == Square.white)
+        XCTAssertTrue(game.moves[1].squares[2...].allSatisfy({ (square) -> Bool in
+            square == Square.empty
+        }))
+    }
+    
+    func testGameUndoMove() {
+        let game = Game.init()
+        XCTAssertEqual(game.moves.count, 1)
+        game.addMove(index: Int.random(in: 0..<Board.kSquaresCount), square: Square.black)
+        XCTAssertEqual(game.moves.count, 2)
+        game.addMove(index: Int.random(in: 0..<Board.kSquaresCount), square: Square.black)
+        XCTAssertEqual(game.moves.count, 3)
+        game.addMove(index: Int.random(in: 0..<Board.kSquaresCount), square: Square.black)
+        XCTAssertEqual(game.moves.count, 4)
+        game.undoMostRecentMove()
+        XCTAssertEqual(game.moves.count, 3)
+        game.undoMostRecentMove()
+        XCTAssertEqual(game.moves.count, 2)
+        game.undoMostRecentMove()
+        XCTAssertEqual(game.moves.count, 1)
+        game.undoMostRecentMove()
+        XCTAssertEqual(game.moves.count, 1)
     }
 
     func testPerformanceExample() {

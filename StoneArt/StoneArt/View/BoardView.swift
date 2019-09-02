@@ -11,7 +11,6 @@ import UIKit
 
 class BoardView: SKView {
     static let kBoardZPosition = CGFloat(100.0)
-    static let kSquaresPerDim = 15
 
     struct BoardMetrics {
         let boardImageName: String
@@ -58,14 +57,14 @@ class BoardView: SKView {
             
             let board = BoardNode(imageNamed: metrics.boardImageName)
             
-            let squareDimInUnitSpace = 1.0 / CGFloat(BoardView.kSquaresPerDim + 1)
+            let squareDimInUnitSpace = 1.0 / CGFloat(Board.kSquaresPerDim + 1)
             board.anchorPoint = CGPoint(x: squareDimInUnitSpace, y: 1.0 - squareDimInUnitSpace)
             
             // If our collection of artwork is done correctly, the board images
             // always fit within the available screen space.
             let xMargin = (scene.size.width - board.size.width) / 2.0
             let yMargin = (scene.size.height - board.size.height) / 2.0
-            board.position = CGPoint(x: xMargin + metrics.squareDim, y: yMargin + CGFloat(BoardView.kSquaresPerDim) * metrics.squareDim)
+            board.position = CGPoint(x: xMargin + metrics.squareDim, y: yMargin + CGFloat(Board.kSquaresPerDim) * metrics.squareDim)
             board.zPosition = BoardView.kBoardZPosition
             
             scene.addChild(board)
