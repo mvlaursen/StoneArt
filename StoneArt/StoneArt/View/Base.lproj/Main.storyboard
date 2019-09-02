@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="StoneArt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stone Art" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PdK-cH-DLl" userLabel="Title Label">
+                                <rect key="frame" x="0.0" y="85" width="320" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="o0W-ZQ-fC4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="30"/>
+                                <color key="textColor" red="1" green="0.8901960784313725" blue="0.070588235294117646" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <skView contentMode="center" allowsTransparency="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IWt-LL-KVg" userLabel="Board View" customClass="BoardView" customModule="StoneArt" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="134" width="320" height="320"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="IWt-LL-KVg" secondAttribute="height" multiplier="1:1" id="VRQ-jr-3yh" userLabel="aspect = 1:1"/>
+                                </constraints>
+                            </skView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="IWt-LL-KVg" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="INL-Gq-c5V"/>
+                            <constraint firstItem="PdK-cH-DLl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OJa-gx-NiB"/>
+                            <constraint firstItem="IWt-LL-KVg" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="WxC-dz-xqN"/>
+                            <constraint firstItem="PdK-cH-DLl" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="e7r-WB-0je"/>
+                            <constraint firstItem="PdK-cH-DLl" firstAttribute="bottom" secondItem="IWt-LL-KVg" secondAttribute="top" priority="500" constant="-16" id="lpm-v5-62b"/>
+                            <constraint firstItem="PdK-cH-DLl" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="IWt-LL-KVg" secondAttribute="top" id="ph2-jL-0L9"/>
+                            <constraint firstItem="IWt-LL-KVg" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" priority="750" id="qZ9-rL-aA6"/>
+                            <constraint firstItem="IWt-LL-KVg" firstAttribute="width" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="width" id="rmT-fw-SjH"/>
+                            <constraint firstItem="PdK-cH-DLl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vVa-ec-tNk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PdK-cH-DLl" secondAttribute="trailing" id="yKz-MV-x5e"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.25" y="118.30985915492958"/>
+        </scene>
+    </scenes>
+</document>
