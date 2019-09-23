@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stone Art" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PdK-cH-DLl" userLabel="Title Label">
-                                <rect key="frame" x="0.0" y="85" width="320" height="33"/>
+                                <rect key="frame" x="0.0" y="75" width="320" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="o0W-ZQ-fC4"/>
                                 </constraints>
@@ -28,9 +28,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <skView contentMode="center" allowsTransparency="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IWt-LL-KVg" userLabel="Board View" customClass="BoardView" customModule="StoneArt" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="134" width="320" height="320"/>
+                                <rect key="frame" x="0.0" y="124" width="320" height="340"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="IWt-LL-KVg" secondAttribute="height" multiplier="1:1" id="VRQ-jr-3yh" userLabel="aspect = 1:1"/>
+                                    <constraint firstAttribute="width" secondItem="IWt-LL-KVg" secondAttribute="height" multiplier="1:1.0625" id="VRQ-jr-3yh"/>
                                 </constraints>
                             </skView>
                         </subviews>

@@ -27,17 +27,17 @@ class BoardView: SKView {
         let width = min(size.width, size.height)
         
         if width.isEqual(to: 375.0) {
-            return BoardMetrics(boardImageName: "GomokuBoard368", squareDim: 23.0, blackImageName: "BlackStone21", whiteImageName: "WhiteStone21")
+            return BoardMetrics(boardImageName: "StoneArtBoard368", squareDim: 23.0, blackImageName: "BlackStone21", whiteImageName: "WhiteStone21")
         } else if width.isEqual(to: 768.0) {
-            return BoardMetrics(boardImageName: "GomokuBoard768", squareDim: 48.0, blackImageName: "BlackStone45", whiteImageName: "WhiteStone45")
+            return BoardMetrics(boardImageName: "StoneArtBoard768", squareDim: 48.0, blackImageName: "BlackStone45", whiteImageName: "WhiteStone45")
         } else if width.isEqual(to: 414.0) {
-            return BoardMetrics(boardImageName: "GomokuBoard400", squareDim: 25.0, blackImageName: "BlackStone23", whiteImageName: "WhiteStone23")
+            return BoardMetrics(boardImageName: "StoneArtBoard400", squareDim: 25.0, blackImageName: "BlackStone23", whiteImageName: "WhiteStone23")
         } else if width.isEqual(to: 1024.0) {
-            return BoardMetrics(boardImageName: "GomokuBoard1024", squareDim: 64.0, blackImageName: "BlackStone60", whiteImageName: "WhiteStone60")
+            return BoardMetrics(boardImageName: "StoneArtBoard1024", squareDim: 64.0, blackImageName: "BlackStone60", whiteImageName: "WhiteStone60")
         } else if width.isEqual(to: 834.0) {
-            return BoardMetrics(boardImageName: "GomokuBoard768", squareDim: 48.0, blackImageName: "BlackStone45", whiteImageName: "WhiteStone45")
+            return BoardMetrics(boardImageName: "StoneArtBoard768", squareDim: 48.0, blackImageName: "BlackStone45", whiteImageName: "WhiteStone45")
         } else {
-            return BoardMetrics(boardImageName: "GomokuBoard320", squareDim: 20.0, blackImageName: "BlackStone18", whiteImageName: "WhiteStone18")
+            return BoardMetrics(boardImageName: "StoneArtBoard320", squareDim: 20.0, blackImageName: "BlackStone18", whiteImageName: "WhiteStone18")
         }
     }
     
@@ -58,13 +58,16 @@ class BoardView: SKView {
             let board = BoardNode(imageNamed: metrics.boardImageName)
             
             let squareDimInUnitSpace = 1.0 / CGFloat(Board.kSquaresPerDim + 1)
-            board.anchorPoint = CGPoint(x: squareDimInUnitSpace, y: 1.0 - squareDimInUnitSpace)
+            board.anchorPoint = CGPoint(x: squareDimInUnitSpace, y: 1 - squareDimInUnitSpace)
             
             // If our collection of artwork is done correctly, the board images
-            // always fit within the available screen space.
+            // always fit within the available screen space. The board image
+            // has a palette area at the bottom where the user grabs new
+            // stones to place; it has a height of one squareDim.
             let xMargin = (scene.size.width - board.size.width) / 2.0
             let yMargin = (scene.size.height - board.size.height) / 2.0
-            board.position = CGPoint(x: xMargin + metrics.squareDim, y: yMargin + CGFloat(Board.kSquaresPerDim) * metrics.squareDim)
+            let yPalette = metrics.squareDim
+            board.position = CGPoint(x: xMargin + metrics.squareDim, y: yMargin + CGFloat(Board.kSquaresPerDim) * metrics.squareDim + yPalette)
             board.zPosition = BoardView.kBoardZPosition
             
             scene.addChild(board)
