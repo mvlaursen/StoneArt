@@ -13,7 +13,10 @@ class BoardView: SKView {
     static let kBoardZPosition = CGFloat(100.0)
     static let kStoneZPosition = CGFloat(200.0)
 
+    private static let kBoardUpdateInterval = 0.1
+    
     var board = Board()
+    var boardUpdateTimer: Timer? = nil
 
     struct BoardMetrics {
         let boardImageName: String
@@ -81,8 +84,26 @@ class BoardView: SKView {
             self.presentScene(scene)
             
             // Test out drawing stones.
-            updateBoard()
+            startUpdatingBoard()
         }
+    }
+    
+    func startUpdatingBoard() {
+        assert(boardUpdateTimer == nil)
+        if boardUpdateTimer != nil {
+            boardUpdateTimer?.invalidate()
+            boardUpdateTimer = nil
+        }
+        
+        boardUpdateTimer = Timer.scheduledTimer(withTimeInterval: BoardView.kBoardUpdateInterval, repeats: true, block: { (timer) in
+            self.updateBoard()
+        })
+    }
+    
+    func stopUpdatingBoard() {
+        boardUpdateTimer?.invalidate()
+        self.updateBoard()
+        boardUpdateTimer = nil
     }
     
     func updateBoard() {
