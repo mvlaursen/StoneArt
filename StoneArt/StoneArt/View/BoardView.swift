@@ -90,13 +90,7 @@ class BoardView: SKView {
             
             scene.addChild(boardNode)
             
-            self.presentScene(scene)
-            
-            // Test out drawing stones.
-            
-            board = Board(board: board, index: 0, square: .black)
-            board = Board(board: board, index: 1, square: .white)
-            board = Board(board: board, index: 2, square: .white)
+            self.presentScene(scene)            
             startRefreshing()
         }
     }
@@ -166,16 +160,20 @@ class BoardView: SKView {
         // that was passed in.
         
         let column = Int(round(location.x / metrics.squareDim))
-        let xFromColumn = CGFloat(column) * metrics.squareDim
-        
-        if xFromColumn.matches(location.x, within: metrics.squareDim / BoardView.kTapTolerance) {
-            let row = Int(round(-location.y / metrics.squareDim))
-            let yFromRow = CGFloat(-row) * metrics.squareDim
+        if column >= 0 && column < Board.kSquaresPerDim {
+            let xFromColumn = CGFloat(column) * metrics.squareDim
             
-            if yFromRow.matches(location.y, within: metrics.squareDim / BoardView.kTapTolerance) {
-                print("    x, y: \(xFromColumn), \(yFromRow)")
-                print("    row, column: \(row), \(column)")
-                retVal = Board.indexFrom(row: row, column: column)
+            if xFromColumn.matches(location.x, within: metrics.squareDim / BoardView.kTapTolerance) {
+                let row = Int(round(-location.y / metrics.squareDim))
+                if row >= 0 && row < Board.kSquaresPerDim {
+                    let yFromRow = CGFloat(-row) * metrics.squareDim
+                
+                    if yFromRow.matches(location.y, within: metrics.squareDim / BoardView.kTapTolerance) {
+                        print("    x, y: \(xFromColumn), \(yFromRow)")
+                        print("    row, column: \(row), \(column)")
+                        retVal = Board.indexFrom(row: row, column: column)
+                    }
+                }
             }
         }
         
