@@ -90,7 +90,7 @@ class BoardView: SKView {
             
             scene.addChild(boardNode)
             
-            self.presentScene(scene)            
+            self.presentScene(scene)
             startRefreshing()
         }
     }
@@ -115,6 +115,18 @@ class BoardView: SKView {
                             }
                         }
                     }
+                    
+                    // Add stones to palette area.
+                    
+                    let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName)
+                    whitePaletteStone.position = CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim)
+                    whitePaletteStone.zPosition = BoardView.kStoneZPosition
+                    boardNode.addChild(whitePaletteStone)
+                    
+                    let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName)
+                    blackPaletteStone.position = CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim)
+                    blackPaletteStone.zPosition = BoardView.kStoneZPosition
+                    boardNode.addChild(blackPaletteStone)
                 }
             }
         }
