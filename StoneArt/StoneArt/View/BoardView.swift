@@ -24,6 +24,7 @@ class BoardView: SKView {
     
     var board = Board()
     var boardUpdateTimer: Timer? = nil
+    var paletteStones: Dictionary<Square, StoneNode> = [:]
 
     struct BoardMetrics {
         let boardImageName: String
@@ -118,15 +119,19 @@ class BoardView: SKView {
                     
                     // Add stones to palette area.
                     
-                    let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName)
-                    whitePaletteStone.position = CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim)
-                    whitePaletteStone.zPosition = BoardView.kStoneZPosition
-                    boardNode.addChild(whitePaletteStone)
+                    paletteStones.removeAll()
                     
                     let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName)
                     blackPaletteStone.position = CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim)
                     blackPaletteStone.zPosition = BoardView.kStoneZPosition
+                    paletteStones[.black] = blackPaletteStone
                     boardNode.addChild(blackPaletteStone)
+
+                    let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName)
+                    whitePaletteStone.position = CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim)
+                    whitePaletteStone.zPosition = BoardView.kStoneZPosition
+                    paletteStones[.white] = whitePaletteStone
+                    boardNode.addChild(whitePaletteStone)
                 }
             }
         }
@@ -210,6 +215,17 @@ class BoardView: SKView {
 //                            previousBoard = board
                             board = Board(board: board, index: moveIndex, square: .black)
                         }
+                    }
+                }
+            } else {
+                // TODO: Flawed logic. Any stone on the board can be used as a
+                // palette stone choice. Take advantage of SKSpriteNode being
+                // Equatable, instead?
+                if let stoneNode = stones.first {
+                    if stoneNode.isEqual(to: paletteStones[.black]!) {
+                        print("BLACK!")
+                    } else if stoneNode.isEqual(to: paletteStones[.white]!) {
+                        print("WHITE!!!")
                     }
                 }
             }
