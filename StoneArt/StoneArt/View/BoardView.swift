@@ -84,57 +84,28 @@ class BoardView: SKView {
             self.presentScene(scene)
             
             // Test out drawing stones.
-            startUpdatingBoard()
+            
+            board = Board(board: board, index: 0, square: .black)
+            board = Board(board: board, index: 1, square: .white)
+            board = Board(board: board, index: 2, square: .white)
+            startRefreshing()
         }
     }
     
-    func startUpdatingBoard() {
-        assert(boardUpdateTimer == nil)
-        if boardUpdateTimer != nil {
-            boardUpdateTimer?.invalidate()
-            boardUpdateTimer = nil
-        }
-        
-        boardUpdateTimer = Timer.scheduledTimer(withTimeInterval: BoardView.kBoardUpdateInterval, repeats: true, block: { (timer) in
-            self.updateBoard()
-        })
-    }
-    
-    func stopUpdatingBoard() {
-        boardUpdateTimer?.invalidate()
-        self.updateBoard()
-        boardUpdateTimer = nil
-    }
-    
-    func updateBoard() {
+    func refresh() {
         if let scene = self.scene {
             let boardNodes = scene.children.filter { $0.isKind(of: BoardNode.self) }
             assert(boardNodes.count <= 1)
             if boardNodes.count > 0 {
                 if let boardNode = boardNodes.first {
                     let metrics = BoardView.boardMetrics()
-
                     boardNode.removeAllChildren()
                     
-                    let row = 15
-                    let column = 5
-                    let stone = StoneNode(imageNamed: metrics.blackImageName)
-                    stone.position = CGPoint(x: CGFloat(column) * metrics.squareDim, y: CGFloat(-row) * metrics.squareDim)
-                    stone.zPosition = BoardView.kStoneZPosition
-                    boardNode.addChild(stone)
-                    
-                    let row2 = 15
-                    let column2 = 9
-                    let stone2 = StoneNode(imageNamed: metrics.whiteImageName)
-                    stone2.position = CGPoint(x: CGFloat(column2) * metrics.squareDim, y: CGFloat(-row2) * metrics.squareDim)
-                    stone2.zPosition = BoardView.kStoneZPosition
-                    boardNode.addChild(stone2)
-
                     for row in 0..<Board.kSquaresPerDim {
                         for column in 0..<Board.kSquaresPerDim {
                             let square = board.squares[Board.indexFrom(row: row, column: column)]
                             if square == .black || square == .white {
-                                let stone = StoneNode(imageNamed: metrics.blackImageName)
+                                let stone = StoneNode(imageNamed: square == .black ? metrics.blackImageName : metrics.whiteImageName)
                                 stone.position = CGPoint(x: CGFloat(column) * metrics.squareDim, y: CGFloat(-row) * metrics.squareDim)
                                 stone.zPosition = BoardView.kStoneZPosition
                                 boardNode.addChild(stone)
@@ -144,5 +115,23 @@ class BoardView: SKView {
                 }
             }
         }
+    }
+
+    func startRefreshing() {
+        assert(boardUpdateTimer == nil)
+        if boardUpdateTimer != nil {
+            boardUpdateTimer?.invalidate()
+            boardUpdateTimer = nil
+        }
+        
+        boardUpdateTimer = Timer.scheduledTimer(withTimeInterval: BoardView.kBoardUpdateInterval, repeats: true, block: { (timer) in
+            self.refresh()
+        })
+    }
+    
+    func stopRefreshing() {
+        boardUpdateTimer?.invalidate()
+        self.refresh()
+        boardUpdateTimer = nil
     }
 }
