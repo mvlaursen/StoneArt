@@ -11,6 +11,7 @@ import UIKit
 
 class BoardView: SKView {
     static let kBoardZPosition = CGFloat(100.0)
+    static let kStoneZPosition = CGFloat(200.0)
 
     struct BoardMetrics {
         let boardImageName: String
@@ -20,6 +21,9 @@ class BoardView: SKView {
     }
     
     class BoardNode: SKSpriteNode {
+    }
+    
+    class StoneNode: SKSpriteNode {
     }
     
     static func boardMetrics() -> BoardMetrics {
@@ -55,22 +59,31 @@ class BoardView: SKView {
             // of the board, but aligning row 0 with y = 0 allows us to simply
             // negate the value of y when converting.
             
-            let board = BoardNode(imageNamed: metrics.boardImageName)
+            let boardNode = BoardNode(imageNamed: metrics.boardImageName)
             
             let squareDimInUnitSpace = 1.0 / CGFloat(Board.kSquaresPerDim + 1)
-            board.anchorPoint = CGPoint(x: squareDimInUnitSpace, y: 1 - squareDimInUnitSpace)
+            boardNode.anchorPoint = CGPoint(x: squareDimInUnitSpace, y: 1 - squareDimInUnitSpace)
             
             // If our collection of artwork is done correctly, the board images
             // always fit within the available screen space. The board image
             // has a palette area at the bottom where the user grabs new
             // stones to place; it has a height of one squareDim.
-            let xMargin = (scene.size.width - board.size.width) / 2.0
-            let yMargin = (scene.size.height - board.size.height) / 2.0
+            let xMargin = (scene.size.width - boardNode.size.width) / 2.0
+            let yMargin = (scene.size.height - boardNode.size.height) / 2.0
             let yPalette = metrics.squareDim
-            board.position = CGPoint(x: xMargin + metrics.squareDim, y: yMargin + CGFloat(Board.kSquaresPerDim) * metrics.squareDim + yPalette)
-            board.zPosition = BoardView.kBoardZPosition
+            boardNode.position = CGPoint(x: xMargin + metrics.squareDim, y: yMargin + CGFloat(Board.kSquaresPerDim) * metrics.squareDim + yPalette)
+            boardNode.zPosition = BoardView.kBoardZPosition
             
-            scene.addChild(board)
+            scene.addChild(boardNode)
+            
+            // Test out drawing stones.
+            
+            let row = 7
+            let column = 10
+            let stone = StoneNode(imageNamed: metrics.blackImageName )
+            stone.position = CGPoint(x: CGFloat(column) * metrics.squareDim, y: CGFloat(-row) * metrics.squareDim)
+            stone.zPosition = BoardView.kStoneZPosition
+            boardNode.addChild(stone)
             
             self.presentScene(scene)
         }
