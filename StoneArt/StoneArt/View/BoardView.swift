@@ -25,6 +25,7 @@ class BoardView: SKView {
     var board = Board()
     var boardUpdateTimer: Timer? = nil
     var paletteStones: Dictionary<Square, StoneNode> = [:]
+    var selectedSquareType: Square = .empty
 
     struct BoardMetrics {
         let boardImageName: String
@@ -213,7 +214,7 @@ class BoardView: SKView {
                     if let boardNode = boardNodes.first {
                         if let moveIndex = moveIndex(for: touch.location(in: boardNode)) {
 //                            previousBoard = board
-                            board = Board(board: board, index: moveIndex, square: .black)
+                            board = Board(board: board, index: moveIndex, square: selectedSquareType)
                         }
                     }
                 }
@@ -224,8 +225,10 @@ class BoardView: SKView {
                 if let stoneNode = stones.first {
                     if stoneNode.isEqual(to: paletteStones[.black]!) {
                         print("BLACK!")
+                        selectedSquareType = .black
                     } else if stoneNode.isEqual(to: paletteStones[.white]!) {
                         print("WHITE!!!")
+                        selectedSquareType = .white
                     }
                 }
             }
