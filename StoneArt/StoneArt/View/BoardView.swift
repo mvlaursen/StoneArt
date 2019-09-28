@@ -18,6 +18,7 @@ extension CGFloat {
 class BoardView: SKView {
     static let kBoardZPosition = CGFloat(100.0)
     static let kStoneZPosition = CGFloat(200.0)
+    static let kStoneHaloZPosition = CGFloat(190.0)
     static let kTapTolerance = CGFloat(2.5)
 
     private static let kBoardUpdateInterval = 0.1
@@ -123,11 +124,22 @@ class BoardView: SKView {
                     paletteStones.removeAll()
                     
                     let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName)
+                    blackPaletteStone.setValue(metrics.blackImageName, forKey: "name")
                     blackPaletteStone.position = CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim)
                     blackPaletteStone.zPosition = BoardView.kStoneZPosition
                     paletteStones[.black] = blackPaletteStone
                     boardNode.addChild(blackPaletteStone)
 
+                    // TODO: Turn this proof of concept code into a glow effect
+                    // that can be applied to any palette stone.
+                    let effectNode = SKEffectNode()
+                    effectNode.filter = CIFilter(name: "CIGaussianBlur", parameters: [:])
+                    let s = SKSpriteNode(imageNamed: blackPaletteStone.value(forKey: "name") as! String)
+                    s.position = blackPaletteStone.position
+                    s.zPosition = BoardView.kStoneHaloZPosition
+                    effectNode.addChild(s)
+                    boardNode.addChild(effectNode)
+                    
                     let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName)
                     whitePaletteStone.position = CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim)
                     whitePaletteStone.zPosition = BoardView.kStoneZPosition
