@@ -39,6 +39,15 @@ class BoardView: SKView {
     }
     
     class StoneNode: SKSpriteNode {
+        func applySelectedEffect() {
+            let effectNode = SKEffectNode()
+            effectNode.filter = CIFilter(name: "CIGaussianBlur", parameters: [:])
+            let s = SKSpriteNode(imageNamed: self.value(forKey: "name") as! String)
+            s.position = self.position
+            s.zPosition = BoardView.kStoneHaloZPosition
+            effectNode.addChild(s)
+            self.parent!.addChild(effectNode)
+        }
     }
     
     static func boardMetrics() -> BoardMetrics {
@@ -124,23 +133,18 @@ class BoardView: SKView {
                     paletteStones.removeAll()
                     
                     let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName)
+                    // TODO: How else can we keep the image name on the
+                    // StoneNode object?
                     blackPaletteStone.setValue(metrics.blackImageName, forKey: "name")
                     blackPaletteStone.position = CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim)
                     blackPaletteStone.zPosition = BoardView.kStoneZPosition
                     paletteStones[.black] = blackPaletteStone
                     boardNode.addChild(blackPaletteStone)
 
-                    // TODO: Turn this proof of concept code into a glow effect
-                    // that can be applied to any palette stone.
-                    let effectNode = SKEffectNode()
-                    effectNode.filter = CIFilter(name: "CIGaussianBlur", parameters: [:])
-                    let s = SKSpriteNode(imageNamed: blackPaletteStone.value(forKey: "name") as! String)
-                    s.position = blackPaletteStone.position
-                    s.zPosition = BoardView.kStoneHaloZPosition
-                    effectNode.addChild(s)
-                    boardNode.addChild(effectNode)
-                    
                     let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName)
+                    // TODO: How else can we keep the image name on the
+                    // StoneNode object?
+                    whitePaletteStone.setValue(metrics.whiteImageName, forKey: "name")
                     whitePaletteStone.position = CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim)
                     whitePaletteStone.zPosition = BoardView.kStoneZPosition
                     paletteStones[.white] = whitePaletteStone
@@ -231,16 +235,17 @@ class BoardView: SKView {
                     }
                 }
             } else {
-                // TODO: Flawed logic. Any stone on the board can be used as a
-                // palette stone choice. Take advantage of SKSpriteNode being
-                // Equatable, instead?
                 if let stoneNode = stones.first {
                     if stoneNode.isEqual(to: paletteStones[.black]!) {
                         print("BLACK!")
                         selectedSquareType = .black
+                        let stoneNode = stoneNode as! StoneNode
+                        stoneNode.applySelectedEffect()
                     } else if stoneNode.isEqual(to: paletteStones[.white]!) {
                         print("WHITE!!!")
                         selectedSquareType = .white
+                        let stoneNode = stoneNode as! StoneNode
+                        stoneNode.applySelectedEffect()
                     }
                 }
             }
