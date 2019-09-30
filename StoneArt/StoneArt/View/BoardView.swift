@@ -102,7 +102,7 @@ class BoardView: SKView {
         
     class StoneNode: SKNode {
         var imageName: String = ""
-        var selectedEffectNode: SKEffectNode? = nil
+        var selectedEffectNode: SKEffectNode = SKEffectNode()
 
         required init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
@@ -116,11 +116,10 @@ class BoardView: SKView {
             backgroundImage.position = position
             backgroundImage.zPosition = BoardView.kStoneHaloZPosition
             // TODO: Better seletion effect.
-            selectedEffectNode = SKEffectNode()
-            selectedEffectNode?.filter = CIFilter(name: "CIGaussianBlur")
-            selectedEffectNode?.shouldEnableEffects = false
-            selectedEffectNode?.addChild(backgroundImage)
-            self.addChild(selectedEffectNode!)
+            selectedEffectNode.filter = CIFilter(name: "CIGaussianBlur")
+            selectedEffectNode.shouldEnableEffects = false
+            selectedEffectNode.addChild(backgroundImage)
+            self.addChild(selectedEffectNode)
             
             let foregroundImage = SKSpriteNode(imageNamed: imageName)
             foregroundImage.position = position
@@ -139,12 +138,11 @@ class BoardView: SKView {
         }
         
         var shouldEnableEffects: Bool {
-            // TODO: Fix force unwraps.
             get {
-                return self.selectedEffectNode!.shouldEnableEffects
+                return self.selectedEffectNode.shouldEnableEffects
             }
             set {
-                self.selectedEffectNode!.shouldEnableEffects = newValue
+                self.selectedEffectNode.shouldEnableEffects = newValue
             }
         }
     }
