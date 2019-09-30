@@ -23,6 +23,9 @@ class BoardView: SKView {
 
     // MARK: BoardMetrics
 
+    /**
+     * The images and layout dimensions we use are dependent on the current device's resolution.
+     */
     struct BoardMetrics {
         let boardImageName: String
         let squareDim: CGFloat
@@ -32,14 +35,21 @@ class BoardView: SKView {
     
     // MARK: BoardNode
 
+    /**
+     * An SKSpriteNode subclass makes it possible to use a filter to find the board's node among the
+     * scene's child nodes.
+     */
     class BoardNode: SKSpriteNode {
     }
     
     // MARK: BoardSceneDelegate
     
+    /**
+     * Handles updating of the scene, based on the data in the Board model.
+     */
     class BoardSceneDelegate: NSObject, SKSceneDelegate {
         var board = Board()
-        var paletteStones: Dictionary<Square, StoneNode> = [:]
+        var palette: Dictionary<Square, StoneNode> = [:]
         
         func update(_ currentTime: TimeInterval, for scene: SKScene) {
             let boardNodes = scene.children.filter { $0.isKind(of: BoardNode.self) }
@@ -61,8 +71,8 @@ class BoardView: SKView {
                     
                     // Add stones to palette area.
                                         
-                    boardNode.addChild(paletteStones[.black]!)
-                    boardNode.addChild(paletteStones[.white]!)
+                    boardNode.addChild(palette[.black]!)
+                    boardNode.addChild(palette[.white]!)
                 }
             }
         }
@@ -177,13 +187,13 @@ class BoardView: SKView {
             
             // Create palette of stones of various colors.
             
-            precondition(boardSceneDelegate.paletteStones.isEmpty)
+            precondition(boardSceneDelegate.palette.isEmpty)
         
             let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName, position: CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
-            boardSceneDelegate.paletteStones[.black] = blackPaletteStone
+            boardSceneDelegate.palette[.black] = blackPaletteStone
 
             let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName, position: CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
-            boardSceneDelegate.paletteStones[.white] = whitePaletteStone
+            boardSceneDelegate.palette[.white] = whitePaletteStone
 
             // Start the show!
 
@@ -257,18 +267,18 @@ class BoardView: SKView {
                 }
             } else {
                 if let stoneNode = stones.first {
-                    if stoneNode.isEqual(to: self.boardSceneDelegate.paletteStones[.black]!) {
+                    if stoneNode.isEqual(to: self.boardSceneDelegate.palette[.black]!) {
                         print("BLACK!")
                         selectedSquareType = .black
                         let stoneNode = stoneNode as! StoneNode
                         stoneNode.shouldEnableEffects = true
-                        self.boardSceneDelegate.paletteStones[.white]?.shouldEnableEffects = false
-                    } else if stoneNode.isEqual(to: self.boardSceneDelegate.paletteStones[.white]!) {
+                        self.boardSceneDelegate.palette[.white]?.shouldEnableEffects = false
+                    } else if stoneNode.isEqual(to: self.boardSceneDelegate.palette[.white]!) {
                         print("WHITE!!!")
                         selectedSquareType = .white
                         let stoneNode = stoneNode as! StoneNode
                         stoneNode.shouldEnableEffects = true
-                        self.boardSceneDelegate.paletteStones[.black]?.shouldEnableEffects = false
+                        self.boardSceneDelegate.palette[.black]?.shouldEnableEffects = false
                     }
                 }
             }
