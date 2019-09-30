@@ -266,7 +266,7 @@ class BoardView: SKView {
                         selectedSquareType = .black
                         let stoneNode = stoneNode as! StoneNode
                         stoneNode.shouldEnableEffects = true
-                        paletteStones[.white]?.shouldEnableEffects = false
+                        paletteStones[.white]?.shouldEnableEffects = false
                     } else if stoneNode.isEqual(to: paletteStones[.white]!) {
                         print("WHITE!!!")
                         selectedSquareType = .white
