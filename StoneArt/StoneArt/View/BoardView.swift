@@ -21,8 +21,7 @@ class BoardView: SKView {
     static let kStoneZPosition = CGFloat(250.0)
     static let kTapTolerance = CGFloat(2.5)
 
-    let boardSceneDelegate = BoardSceneDelegate()
-    var selectedSquareType: Square = .empty
+    // MARK: BoardMetrics
 
     struct BoardMetrics {
         let boardImageName: String
@@ -120,6 +119,9 @@ class BoardView: SKView {
         }
     }
     
+    let boardSceneDelegate = BoardSceneDelegate()
+    var selectedSquareType: Square = .empty
+
     static func boardMetrics() -> BoardMetrics {
         let size = UIScreen.main.bounds.size
         let width = min(size.width, size.height)
@@ -175,7 +177,7 @@ class BoardView: SKView {
             
             // Create palette of stones of various colors.
             
-            precondition(boardSceneDelegate.paletteStones.isEmpty ?? false)
+            precondition(boardSceneDelegate.paletteStones.isEmpty)
         
             let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName, position: CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
             boardSceneDelegate.paletteStones[.black] = blackPaletteStone
