@@ -17,8 +17,8 @@ extension CGFloat {
 
 class BoardView: SKView {
     static let kBoardZPosition = CGFloat(100.0)
-    static let kStoneZPosition = CGFloat(200.0)
     static let kStoneHaloZPosition = CGFloat(190.0)
+    static let kStoneZPosition = CGFloat(200.0)
     static let kTapTolerance = CGFloat(2.5)
 
     private static let kBoardUpdateInterval = 0.1
@@ -37,16 +37,52 @@ class BoardView: SKView {
     
     class BoardNode: SKSpriteNode {
     }
-    
-    class StoneNode: SKSpriteNode {
-        func applySelectedEffect() {
-            let effectNode = SKEffectNode()
-            effectNode.filter = CIFilter(name: "CIGaussianBlur", parameters: [:])
-            let s = SKSpriteNode(imageNamed: self.value(forKey: "name") as! String)
-            s.position = self.position
-            s.zPosition = BoardView.kStoneHaloZPosition
-            effectNode.addChild(s)
-            self.parent!.addChild(effectNode)
+        
+    class StoneNode: SKNode {
+        var effectBG: SKEffectNode? = nil
+        var imageName: String = ""
+        
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+        init(imageNamed imageName: String, position: CGPoint) {
+            super.init()
+            
+            self.imageName = imageName
+            
+            let spriteBG = SKSpriteNode(imageNamed: imageName)
+            spriteBG.position = position
+            spriteBG.zPosition = BoardView.kStoneZPosition
+            effectBG = SKEffectNode()
+            effectBG?.filter = CIFilter(name: "CIGaussianBlur")
+            effectBG?.shouldEnableEffects = false
+            effectBG?.addChild(spriteBG)
+            self.addChild(effectBG!)
+            
+            let spriteFG = SKSpriteNode(imageNamed: imageName)
+            spriteFG.position = position
+            spriteFG.zPosition = BoardView.kStoneZPosition
+            self.addChild(spriteFG)
+        }
+        
+        override func isEqual(to node: SKNode) -> Bool {
+            var isEqual: Bool = false
+            
+            if let node = node as? StoneNode { // Don't force
+                isEqual = self.imageName == node.imageName
+            }
+            
+            return isEqual
+        }
+        
+        var shouldEnableEffects: Bool {
+            get {
+                return self.effectBG!.shouldEnableEffects
+            }
+            set {
+                self.effectBG!.shouldEnableEffects = newValue
+            }
         }
     }
     
@@ -120,9 +156,7 @@ class BoardView: SKView {
                         for column in 0..<Board.kSquaresPerDim {
                             let square = board.squares[Board.indexFrom(row: row, column: column)]
                             if square == .black || square == .white {
-                                let stone = StoneNode(imageNamed: square == .black ? metrics.blackImageName : metrics.whiteImageName)
-                                stone.position = CGPoint(x: CGFloat(column) * metrics.squareDim, y: CGFloat(-row) * metrics.squareDim)
-                                stone.zPosition = BoardView.kStoneZPosition
+                                let stone = StoneNode(imageNamed: square == .black ? metrics.blackImageName : metrics.whiteImageName, position: CGPoint(x: CGFloat(column) * metrics.squareDim, y: CGFloat(-row) * metrics.squareDim))
                                 boardNode.addChild(stone)
                             }
                         }
@@ -132,21 +166,11 @@ class BoardView: SKView {
                     
                     paletteStones.removeAll()
                     
-                    let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName)
-                    // TODO: How else can we keep the image name on the
-                    // StoneNode object?
-                    blackPaletteStone.setValue(metrics.blackImageName, forKey: "name")
-                    blackPaletteStone.position = CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim)
-                    blackPaletteStone.zPosition = BoardView.kStoneZPosition
+                    let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName, position: CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
                     paletteStones[.black] = blackPaletteStone
                     boardNode.addChild(blackPaletteStone)
 
-                    let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName)
-                    // TODO: How else can we keep the image name on the
-                    // StoneNode object?
-                    whitePaletteStone.setValue(metrics.whiteImageName, forKey: "name")
-                    whitePaletteStone.position = CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim)
-                    whitePaletteStone.zPosition = BoardView.kStoneZPosition
+                    let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName, position: CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
                     paletteStones[.white] = whitePaletteStone
                     boardNode.addChild(whitePaletteStone)
                 }
@@ -240,12 +264,12 @@ class BoardView: SKView {
                         print("BLACK!")
                         selectedSquareType = .black
                         let stoneNode = stoneNode as! StoneNode
-                        stoneNode.applySelectedEffect()
+                        stoneNode.shouldEnableEffects = true
                     } else if stoneNode.isEqual(to: paletteStones[.white]!) {
                         print("WHITE!!!")
                         selectedSquareType = .white
                         let stoneNode = stoneNode as! StoneNode
-                        stoneNode.applySelectedEffect()
+                        stoneNode.shouldEnableEffects = true
                     }
                 }
             }
