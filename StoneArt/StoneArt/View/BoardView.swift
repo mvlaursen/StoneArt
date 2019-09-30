@@ -35,8 +35,12 @@ class BoardView: SKView {
         let whiteImageName: String
     }
     
+    // MARK: Board Node
+
     class BoardNode: SKSpriteNode {
     }
+    
+    // MARK: StoneNode
         
     class StoneNode: SKNode {
         var effectBG: SKEffectNode? = nil
@@ -51,9 +55,12 @@ class BoardView: SKView {
             
             self.imageName = imageName
             
+            // TODO: Better variable names.
+
             let spriteBG = SKSpriteNode(imageNamed: imageName)
             spriteBG.position = position
             spriteBG.zPosition = BoardView.kStoneZPosition
+            // TODO: Better seletion effect.
             effectBG = SKEffectNode()
             effectBG?.filter = CIFilter(name: "CIGaussianBlur")
             effectBG?.shouldEnableEffects = false
@@ -138,11 +145,25 @@ class BoardView: SKView {
             
             scene.addChild(boardNode)
             
+            // Create palette of stones of various colors.
+            
+            precondition(paletteStones.isEmpty)
+        
+            let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName, position: CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
+            paletteStones[.black] = blackPaletteStone
+
+            let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName, position: CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
+            paletteStones[.white] = whitePaletteStone
+
+            // Start the show!
+
             self.presentScene(scene)
             startRefreshing()
         }
     }
     
+    // TODO: Instead of running our own timer, does Sprite Kit provide a way to
+    // tie into the frames-per-second refresh cycle?
     func refresh() {
         if let scene = self.scene {
             let boardNodes = scene.children.filter { $0.isKind(of: BoardNode.self) }
@@ -164,14 +185,6 @@ class BoardView: SKView {
                     
                     // Add stones to palette area.
                                         
-                    if paletteStones.isEmpty {
-                        let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName, position: CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
-                        paletteStones[.black] = blackPaletteStone
-
-                        let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName, position: CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
-                        paletteStones[.white] = whitePaletteStone
-                    }
-                    
                     boardNode.addChild(paletteStones[.black]!)
                     boardNode.addChild(paletteStones[.white]!)
                 }
