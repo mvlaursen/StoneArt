@@ -51,6 +51,19 @@ class BoardView: SKView {
         var board = Board()
         var palette: Dictionary<Square, StoneNode> = [:]
         
+        override init() {
+            // Create palette of stones of various colors.
+            
+            let metrics = BoardView.boardMetrics()
+            
+            let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName, position: CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
+            self.palette[.black] = blackPaletteStone
+
+            let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName, position: CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
+            self.palette[.white] = whitePaletteStone
+
+        }
+        
         func update(_ currentTime: TimeInterval, for scene: SKScene) {
             let boardNodes = scene.children.filter { $0.isKind(of: BoardNode.self) }
             assert(boardNodes.count <= 1)
@@ -70,9 +83,16 @@ class BoardView: SKView {
                     }
                     
                     // Add stones to palette area.
-                                        
-                    boardNode.addChild(palette[.black]!)
-                    boardNode.addChild(palette[.white]!)
+                    
+                    assert(palette[.black] != nil)
+                    if let blackStone = palette[.black] {
+                        boardNode.addChild(blackStone)
+                    }
+                    
+                    assert(palette[.white] != nil)
+                    if let whiteStone = palette[.white] {
+                        boardNode.addChild(whiteStone)
+                    }
                 }
             }
         }
@@ -185,16 +205,6 @@ class BoardView: SKView {
             
             scene.addChild(boardNode)
             
-            // Create palette of stones of various colors.
-            
-            precondition(boardSceneDelegate.palette.isEmpty)
-        
-            let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName, position: CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
-            boardSceneDelegate.palette[.black] = blackPaletteStone
-
-            let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName, position: CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
-            boardSceneDelegate.palette[.white] = whitePaletteStone
-
             // Start the show!
 
             self.presentScene(scene)
