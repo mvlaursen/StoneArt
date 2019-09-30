@@ -148,7 +148,7 @@ class BoardView: SKView {
     }
     
     let boardSceneDelegate = BoardSceneDelegate()
-    var selectedSquareType: Square = .empty
+    var paletteSelection: Square = .empty
 
     static func boardMetrics() -> BoardMetrics {
         let size = UIScreen.main.bounds.size
@@ -269,7 +269,7 @@ class BoardView: SKView {
                         if let moveIndex = moveIndex(for: touch.location(in: boardNode)) {
 //                            previousBoard = board
                             // TODO: Fix force unwraps.
-                            self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: selectedSquareType)
+                            self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: paletteSelection)
                         }
                     }
                 }
@@ -277,13 +277,13 @@ class BoardView: SKView {
                 if let stoneNode = stones.first {
                     if stoneNode.isEqual(to: self.boardSceneDelegate.palette[.black]!) {
                         print("BLACK!")
-                        selectedSquareType = .black
+                        paletteSelection = .black
                         let stoneNode = stoneNode as! StoneNode
                         stoneNode.shouldEnableEffects = true
                         self.boardSceneDelegate.palette[.white]?.shouldEnableEffects = false
                     } else if stoneNode.isEqual(to: self.boardSceneDelegate.palette[.white]!) {
                         print("WHITE!!!")
-                        selectedSquareType = .white
+                        paletteSelection = .white
                         let stoneNode = stoneNode as! StoneNode
                         stoneNode.shouldEnableEffects = true
                         self.boardSceneDelegate.palette[.black]?.shouldEnableEffects = false
