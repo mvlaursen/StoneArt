@@ -23,9 +23,7 @@ class BoardView: SKView {
 
     private static let kBoardUpdateInterval = 0.1
     
-    var board = Board()
-    var boardUpdateTimer: Timer? = nil
-    var paletteStones: Dictionary<Square, StoneNode> = [:]
+    var boardSceneDelegate: BoardSceneDelegate? = nil
     var selectedSquareType: Square = .empty
 
     struct BoardMetrics {
@@ -35,9 +33,42 @@ class BoardView: SKView {
         let whiteImageName: String
     }
     
-    // MARK: Board Node
+    // MARK: BoardNode
 
     class BoardNode: SKSpriteNode {
+    }
+    
+    // MARK: BoardSceneDelegate
+    
+    class BoardSceneDelegate: NSObject, SKSceneDelegate {
+        var board = Board()
+        var paletteStones: Dictionary<Square, StoneNode> = [:]
+        
+        func update(_ currentTime: TimeInterval, for scene: SKScene) {
+            let boardNodes = scene.children.filter { $0.isKind(of: BoardNode.self) }
+            assert(boardNodes.count <= 1)
+            if boardNodes.count > 0 {
+                if let boardNode = boardNodes.first {
+                    let metrics = BoardView.boardMetrics()
+                    boardNode.removeAllChildren()
+                    
+                    for row in 0..<Board.kSquaresPerDim {
+                        for column in 0..<Board.kSquaresPerDim {
+                            let square = board.squares[Board.indexFrom(row: row, column: column)]
+                            if square == .black || square == .white {
+                                let stone = StoneNode(imageNamed: square == .black ? metrics.blackImageName : metrics.whiteImageName, position: CGPoint(x: CGFloat(column) * metrics.squareDim, y: CGFloat(-row) * metrics.squareDim))
+                                boardNode.addChild(stone)
+                            }
+                        }
+                    }
+                    
+                    // Add stones to palette area.
+                                        
+                    boardNode.addChild(paletteStones[.black]!)
+                    boardNode.addChild(paletteStones[.white]!)
+                }
+            }
+        }
     }
     
     // MARK: StoneNode
@@ -112,13 +143,15 @@ class BoardView: SKView {
         }
     }
     
-    // MARK: Layout and Refresh
+    // MARK: Layout
 
     override func layoutSubviews() {
         if self.scene == nil {
             let metrics = BoardView.boardMetrics()
             let scene = SKScene(size: self.bounds.size)
             scene.backgroundColor = SKColor.clear
+            self.boardSceneDelegate = BoardSceneDelegate()
+            scene.delegate = self.boardSceneDelegate
             
             // To make conversion from the location of a tap in the scene's
             // coordinate system to board row and column as straightforward as
@@ -147,68 +180,20 @@ class BoardView: SKView {
             
             // Create palette of stones of various colors.
             
-            precondition(paletteStones.isEmpty)
+            precondition(boardSceneDelegate?.paletteStones.isEmpty ?? false)
         
             let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName, position: CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
-            paletteStones[.black] = blackPaletteStone
+            boardSceneDelegate?.paletteStones[.black] = blackPaletteStone
 
             let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName, position: CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
-            paletteStones[.white] = whitePaletteStone
+            boardSceneDelegate?.paletteStones[.white] = whitePaletteStone
 
             // Start the show!
 
             self.presentScene(scene)
-            startRefreshing()
         }
     }
     
-    // TODO: Instead of running our own timer, does Sprite Kit provide a way to
-    // tie into the frames-per-second refresh cycle?
-    func refresh() {
-        if let scene = self.scene {
-            let boardNodes = scene.children.filter { $0.isKind(of: BoardNode.self) }
-            assert(boardNodes.count <= 1)
-            if boardNodes.count > 0 {
-                if let boardNode = boardNodes.first {
-                    let metrics = BoardView.boardMetrics()
-                    boardNode.removeAllChildren()
-                    
-                    for row in 0..<Board.kSquaresPerDim {
-                        for column in 0..<Board.kSquaresPerDim {
-                            let square = board.squares[Board.indexFrom(row: row, column: column)]
-                            if square == .black || square == .white {
-                                let stone = StoneNode(imageNamed: square == .black ? metrics.blackImageName : metrics.whiteImageName, position: CGPoint(x: CGFloat(column) * metrics.squareDim, y: CGFloat(-row) * metrics.squareDim))
-                                boardNode.addChild(stone)
-                            }
-                        }
-                    }
-                    
-                    // Add stones to palette area.
-                                        
-                    boardNode.addChild(paletteStones[.black]!)
-                    boardNode.addChild(paletteStones[.white]!)
-                }
-            }
-        }
-    }
-
-    func startRefreshing() {
-        assert(boardUpdateTimer == nil)
-        if boardUpdateTimer != nil {
-            boardUpdateTimer?.invalidate()
-            boardUpdateTimer = nil
-        }
-        
-        boardUpdateTimer = Timer.scheduledTimer(withTimeInterval: BoardView.kBoardUpdateInterval, repeats: true, block: { (timer) in
-            self.refresh()
-        })
-    }
-    
-    func stopRefreshing() {
-        boardUpdateTimer?.invalidate()
-        self.refresh()
-        boardUpdateTimer = nil
-    }
 
     // MARK: Gesture Handling
     
@@ -268,24 +253,25 @@ class BoardView: SKView {
                     if let boardNode = boardNodes.first {
                         if let moveIndex = moveIndex(for: touch.location(in: boardNode)) {
 //                            previousBoard = board
-                            board = Board(board: board, index: moveIndex, square: selectedSquareType)
+                            // TODO: Fix force unwraps.
+                            self.boardSceneDelegate!.board = Board(board: self.boardSceneDelegate!.board, index: moveIndex, square: selectedSquareType)
                         }
                     }
                 }
             } else {
                 if let stoneNode = stones.first {
-                    if stoneNode.isEqual(to: paletteStones[.black]!) {
+                    if stoneNode.isEqual(to: self.boardSceneDelegate!.paletteStones[.black]!) {
                         print("BLACK!")
                         selectedSquareType = .black
                         let stoneNode = stoneNode as! StoneNode
                         stoneNode.shouldEnableEffects = true
-                        paletteStones[.white]?.shouldEnableEffects = false
-                    } else if stoneNode.isEqual(to: paletteStones[.white]!) {
+                        self.boardSceneDelegate!.paletteStones[.white]?.shouldEnableEffects = false
+                    } else if stoneNode.isEqual(to: self.boardSceneDelegate!.paletteStones[.white]!) {
                         print("WHITE!!!")
                         selectedSquareType = .white
                         let stoneNode = stoneNode as! StoneNode
                         stoneNode.shouldEnableEffects = true
-                        paletteStones[.black]?.shouldEnableEffects = false
+                        self.boardSceneDelegate!.paletteStones[.black]?.shouldEnableEffects = false
                     }
                 }
             }
