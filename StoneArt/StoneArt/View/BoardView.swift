@@ -74,9 +74,9 @@ class BoardView: SKView {
     // MARK: StoneNode
         
     class StoneNode: SKNode {
-        var effectBG: SKEffectNode? = nil
         var imageName: String = ""
-        
+        var selectedEffectNode: SKEffectNode? = nil
+
         required init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
@@ -85,23 +85,20 @@ class BoardView: SKView {
             super.init()
             
             self.imageName = imageName
-            
-            // TODO: Better variable names.
-
-            let spriteBG = SKSpriteNode(imageNamed: imageName)
-            spriteBG.position = position
-            spriteBG.zPosition = BoardView.kStoneZPosition
+            let backgroundImage = SKSpriteNode(imageNamed: imageName)
+            backgroundImage.position = position
+            backgroundImage.zPosition = BoardView.kStoneZPosition
             // TODO: Better seletion effect.
-            effectBG = SKEffectNode()
-            effectBG?.filter = CIFilter(name: "CIGaussianBlur")
-            effectBG?.shouldEnableEffects = false
-            effectBG?.addChild(spriteBG)
-            self.addChild(effectBG!)
+            selectedEffectNode = SKEffectNode()
+            selectedEffectNode?.filter = CIFilter(name: "CIGaussianBlur")
+            selectedEffectNode?.shouldEnableEffects = false
+            selectedEffectNode?.addChild(backgroundImage)
+            self.addChild(selectedEffectNode!)
             
-            let spriteFG = SKSpriteNode(imageNamed: imageName)
-            spriteFG.position = position
-            spriteFG.zPosition = BoardView.kStoneZPosition
-            self.addChild(spriteFG)
+            let foregroundImage = SKSpriteNode(imageNamed: imageName)
+            foregroundImage.position = position
+            foregroundImage.zPosition = BoardView.kStoneZPosition
+            self.addChild(foregroundImage)
         }
         
         override func isEqual(to node: SKNode) -> Bool {
@@ -115,11 +112,12 @@ class BoardView: SKView {
         }
         
         var shouldEnableEffects: Bool {
+            // TODO: Fix force unwraps.
             get {
-                return self.effectBG!.shouldEnableEffects
+                return self.selectedEffectNode!.shouldEnableEffects
             }
             set {
-                self.effectBG!.shouldEnableEffects = newValue
+                self.selectedEffectNode!.shouldEnableEffects = newValue
             }
         }
     }
