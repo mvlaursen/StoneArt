@@ -163,16 +163,17 @@ class BoardView: SKView {
                     }
                     
                     // Add stones to palette area.
-                    
-                    paletteStones.removeAll()
-                    
-                    let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName, position: CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
-                    paletteStones[.black] = blackPaletteStone
-                    boardNode.addChild(blackPaletteStone)
+                                        
+                    if paletteStones.isEmpty {
+                        let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName, position: CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
+                        paletteStones[.black] = blackPaletteStone
 
-                    let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName, position: CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
-                    paletteStones[.white] = whitePaletteStone
-                    boardNode.addChild(whitePaletteStone)
+                        let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName, position: CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
+                        paletteStones[.white] = whitePaletteStone
+                    }
+                    
+                    boardNode.addChild(paletteStones[.black]!)
+                    boardNode.addChild(paletteStones[.white]!)
                 }
             }
         }
@@ -265,11 +266,13 @@ class BoardView: SKView {
                         selectedSquareType = .black
                         let stoneNode = stoneNode as! StoneNode
                         stoneNode.shouldEnableEffects = true
+                        paletteStones[.white]?.shouldEnableEffects = false
                     } else if stoneNode.isEqual(to: paletteStones[.white]!) {
                         print("WHITE!!!")
                         selectedSquareType = .white
                         let stoneNode = stoneNode as! StoneNode
                         stoneNode.shouldEnableEffects = true
+                        paletteStones[.black]?.shouldEnableEffects = false
                     }
                 }
             }
