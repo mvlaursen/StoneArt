@@ -16,14 +16,12 @@ extension CGFloat {
 }
 
 class BoardView: SKView {
-    static let kBoardZPosition = CGFloat(100.0)
-    static let kStoneHaloZPosition = CGFloat(190.0)
-    static let kStoneZPosition = CGFloat(200.0)
+    static let kBoardZPosition = CGFloat(150.0)
+    static let kStoneHaloZPosition = CGFloat(200.0)
+    static let kStoneZPosition = CGFloat(250.0)
     static let kTapTolerance = CGFloat(2.5)
 
-    private static let kBoardUpdateInterval = 0.1
-    
-    var boardSceneDelegate: BoardSceneDelegate? = nil
+    let boardSceneDelegate = BoardSceneDelegate()
     var selectedSquareType: Square = .empty
 
     struct BoardMetrics {
@@ -87,7 +85,7 @@ class BoardView: SKView {
             self.imageName = imageName
             let backgroundImage = SKSpriteNode(imageNamed: imageName)
             backgroundImage.position = position
-            backgroundImage.zPosition = BoardView.kStoneZPosition
+            backgroundImage.zPosition = BoardView.kStoneHaloZPosition
             // TODO: Better seletion effect.
             selectedEffectNode = SKEffectNode()
             selectedEffectNode?.filter = CIFilter(name: "CIGaussianBlur")
@@ -148,7 +146,6 @@ class BoardView: SKView {
             let metrics = BoardView.boardMetrics()
             let scene = SKScene(size: self.bounds.size)
             scene.backgroundColor = SKColor.clear
-            self.boardSceneDelegate = BoardSceneDelegate()
             scene.delegate = self.boardSceneDelegate
             
             // To make conversion from the location of a tap in the scene's
@@ -178,13 +175,13 @@ class BoardView: SKView {
             
             // Create palette of stones of various colors.
             
-            precondition(boardSceneDelegate?.paletteStones.isEmpty ?? false)
+            precondition(boardSceneDelegate.paletteStones.isEmpty ?? false)
         
             let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName, position: CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
-            boardSceneDelegate?.paletteStones[.black] = blackPaletteStone
+            boardSceneDelegate.paletteStones[.black] = blackPaletteStone
 
             let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName, position: CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
-            boardSceneDelegate?.paletteStones[.white] = whitePaletteStone
+            boardSceneDelegate.paletteStones[.white] = whitePaletteStone
 
             // Start the show!
 
@@ -252,24 +249,24 @@ class BoardView: SKView {
                         if let moveIndex = moveIndex(for: touch.location(in: boardNode)) {
 //                            previousBoard = board
                             // TODO: Fix force unwraps.
-                            self.boardSceneDelegate!.board = Board(board: self.boardSceneDelegate!.board, index: moveIndex, square: selectedSquareType)
+                            self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: selectedSquareType)
                         }
                     }
                 }
             } else {
                 if let stoneNode = stones.first {
-                    if stoneNode.isEqual(to: self.boardSceneDelegate!.paletteStones[.black]!) {
+                    if stoneNode.isEqual(to: self.boardSceneDelegate.paletteStones[.black]!) {
                         print("BLACK!")
                         selectedSquareType = .black
                         let stoneNode = stoneNode as! StoneNode
                         stoneNode.shouldEnableEffects = true
-                        self.boardSceneDelegate!.paletteStones[.white]?.shouldEnableEffects = false
-                    } else if stoneNode.isEqual(to: self.boardSceneDelegate!.paletteStones[.white]!) {
+                        self.boardSceneDelegate.paletteStones[.white]?.shouldEnableEffects = false
+                    } else if stoneNode.isEqual(to: self.boardSceneDelegate.paletteStones[.white]!) {
                         print("WHITE!!!")
                         selectedSquareType = .white
                         let stoneNode = stoneNode as! StoneNode
                         stoneNode.shouldEnableEffects = true
-                        self.boardSceneDelegate!.paletteStones[.black]?.shouldEnableEffects = false
+                        self.boardSceneDelegate.paletteStones[.black]?.shouldEnableEffects = false
                     }
                 }
             }
