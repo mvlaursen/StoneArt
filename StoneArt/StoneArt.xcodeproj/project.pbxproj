@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3B4894CE23188EA8003212F1 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4894CD23188EA8003212F1 /* BoardView.swift */; };
+		3B4894D4231DA861003212F1 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4894D3231DA861003212F1 /* Square.swift */; };
+		3B4894D6231DA8AD003212F1 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4894D5231DA8AD003212F1 /* Board.swift */; };
+		3B4894D8231DAE43003212F1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4894D7231DAE43003212F1 /* Game.swift */; };
 		3BBD15A123173D860086757A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBD15A023173D860086757A /* AppDelegate.swift */; };
 		3BBD15A323173D860086757A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBD15A223173D860086757A /* ViewController.swift */; };
 		3BBD15A623173D860086757A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BBD15A423173D860086757A /* Main.storyboard */; };
@@ -37,6 +40,9 @@
 
 /* Begin PBXFileReference section */
 		3B4894CD23188EA8003212F1 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		3B4894D3231DA861003212F1 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
+		3B4894D5231DA8AD003212F1 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		3B4894D7231DAE43003212F1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		3BBD159D23173D860086757A /* StoneArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoneArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BBD15A023173D860086757A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BBD15A223173D860086757A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +96,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		3B4894D2231DA843003212F1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3B4894D5231DA8AD003212F1 /* Board.swift */,
+				3B4894D3231DA861003212F1 /* Square.swift */,
+				3B4894D7231DAE43003212F1 /* Game.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		3BBD159423173D860086757A = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +130,7 @@
 		3BBD159F23173D860086757A /* StoneArt */ = {
 			isa = PBXGroup;
 			children = (
+				3B4894D2231DA843003212F1 /* Model */,
 				3BBD15A023173D860086757A /* AppDelegate.swift */,
 				3BBD15AC23173D870086757A /* Info.plist */,
 				3BBD15A223173D860086757A /* ViewController.swift */,
@@ -279,7 +296,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B4894D4231DA861003212F1 /* Square.swift in Sources */,
+				3B4894D8231DAE43003212F1 /* Game.swift in Sources */,
 				3B4894CE23188EA8003212F1 /* BoardView.swift in Sources */,
+				3B4894D6231DA8AD003212F1 /* Board.swift in Sources */,
 				3BBD15A323173D860086757A /* ViewController.swift in Sources */,
 				3BBD15A123173D860086757A /* AppDelegate.swift in Sources */,
 			);
