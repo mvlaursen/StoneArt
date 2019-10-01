@@ -193,6 +193,15 @@ class BoardView: SKView {
         }
     }
     
+    func boardNode() -> BoardNode? {
+        let boardNodes = self.scene?.children.filter { $0.isKind(of: BoardNode.self) }
+        if let boardNode = boardNodes?.first as? BoardNode {
+            return boardNode
+        } else {
+            return nil
+        }
+    }
+
     // MARK: Layout
 
     override func layoutSubviews() {
@@ -278,6 +287,7 @@ class BoardView: SKView {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first, let scene = self.scene {
+            let boardNode = self.boardNode()
             let location = touch.location(in: scene)
             let nodes = scene.nodes(at: location)
             let stones = nodes.filter { $0.isKind(of: BoardView.StoneNode.self) }
@@ -286,16 +296,12 @@ class BoardView: SKView {
             assert(stones.count <= 1)
             
             if stones.isEmpty {
-                let boardNodes = nodes.filter { $0.isKind(of: BoardView.BoardNode.self) }
-                assert(boardNodes.count <= 1)
-                if boardNodes.count > 0 {
-                    if let boardNode = boardNodes.first {
-                        if let moveIndex = moveIndex(for: touch.location(in: boardNode)) {
-//                            previousBoard = board
-                            let squareToAdd = self.boardSceneDelegate.selectedSquare()
-                            if squareToAdd != .empty {
-                                self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: squareToAdd)
-                            }
+                if let boardNode: BoardNode = boardNode {
+                    if let moveIndex = moveIndex(for: touch.location(in: boardNode)) {
+//                        previousBoard = board
+                    let squareToAdd = self.boardSceneDelegate.selectedSquare()
+                        if squareToAdd != .empty {
+                            self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: squareToAdd)
                         }
                     }
                 }
