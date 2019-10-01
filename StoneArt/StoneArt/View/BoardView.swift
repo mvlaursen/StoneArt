@@ -115,10 +115,18 @@ class BoardView: SKView {
             let backgroundImage = SKSpriteNode(imageNamed: imageName)
             backgroundImage.position = position
             backgroundImage.zPosition = BoardView.kStoneHaloZPosition
-            // TODO: Better seletion effect.
+
+            let colorEffectNode = SKEffectNode()
+            colorEffectNode.filter = CIFilter(name: "CIColorMatrix", parameters: ["inputRVector": CIVector(string: "[0 0 0 0]"), "inputGVector": CIVector(string: "[0 0 0 0]"), "inputBVector": CIVector(string: "[1 1 1 1]")])
+            colorEffectNode.addChild(backgroundImage)
+            
+            let scaleEffectNode = SKEffectNode()
+            scaleEffectNode.filter = CIFilter(name: "CILanczosScaleTransform", parameters: ["inputScale": 1.01])
+            scaleEffectNode.addChild(colorEffectNode)
+
+            selectedEffectNode.alpha = 0.0
             selectedEffectNode.filter = CIFilter(name: "CIGaussianBlur")
-            selectedEffectNode.shouldEnableEffects = false
-            selectedEffectNode.addChild(backgroundImage)
+            selectedEffectNode.addChild(scaleEffectNode)
             self.addChild(selectedEffectNode)
             
             let foregroundImage = SKSpriteNode(imageNamed: imageName)
@@ -137,12 +145,12 @@ class BoardView: SKView {
             return isEqual
         }
         
-        var shouldEnableEffects: Bool {
+        var selected: Bool {
             get {
-                return self.selectedEffectNode.shouldEnableEffects
+                return selectedEffectNode.alpha > 0.0
             }
             set {
-                self.selectedEffectNode.shouldEnableEffects = newValue
+                selectedEffectNode.alpha = newValue ? 1.0 : 0.0
             }
         }
     }
@@ -279,14 +287,14 @@ class BoardView: SKView {
                         print("BLACK!")
                         paletteSelection = .black
                         let stoneNode = stoneNode as! StoneNode
-                        stoneNode.shouldEnableEffects = true
-                        self.boardSceneDelegate.palette[.white]?.shouldEnableEffects = false
+                        stoneNode.selected = true
+                        self.boardSceneDelegate.palette[.white]?.selected = false
                     } else if stoneNode.isEqual(to: self.boardSceneDelegate.palette[.white]!) {
                         print("WHITE!!!")
                         paletteSelection = .white
                         let stoneNode = stoneNode as! StoneNode
-                        stoneNode.shouldEnableEffects = true
-                        self.boardSceneDelegate.palette[.black]?.shouldEnableEffects = false
+                        stoneNode.selected = true
+                        self.boardSceneDelegate.palette[.black]?.selected = false
                     }
                 }
             }
