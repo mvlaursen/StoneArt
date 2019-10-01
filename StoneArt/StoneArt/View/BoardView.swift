@@ -72,6 +72,12 @@ class BoardView: SKView {
             }
         }
         
+        func paletteContains(stoneNode: StoneNode) -> Bool {
+            palette.contains {
+                $0.value === stoneNode
+            }
+        }
+        
         func selectedSquare() -> Square {
             var square = Square.empty
             
@@ -296,7 +302,9 @@ class BoardView: SKView {
             } else {
                 if let stoneNode = stones.first {
                     if let stoneNode = stoneNode as? StoneNode {
-                        self.boardSceneDelegate.makePaletteSelection(stoneNode: stoneNode)
+                        if self.boardSceneDelegate.paletteContains(stoneNode: stoneNode) {
+                            self.boardSceneDelegate.makePaletteSelection(stoneNode: stoneNode)
+                        }
                     }
                 }
             }
