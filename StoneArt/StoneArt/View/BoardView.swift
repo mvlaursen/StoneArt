@@ -292,9 +292,9 @@ class BoardView: SKView {
                     if let boardNode = boardNodes.first {
                         if let moveIndex = moveIndex(for: touch.location(in: boardNode)) {
 //                            previousBoard = board
-                            let square = self.boardSceneDelegate.selectedSquare()
-                            if square != .empty {
-                                self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: square)
+                            let squareToAdd = self.boardSceneDelegate.selectedSquare()
+                            if squareToAdd != .empty {
+                                self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: squareToAdd)
                             }
                         }
                     }
