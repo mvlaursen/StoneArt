@@ -286,31 +286,31 @@ class BoardView: SKView {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first, let scene = self.scene {
-            let boardNode = self.boardNode()
-            let location = touch.location(in: scene)
-            let nodes = scene.nodes(at: location)
-            let stones = nodes.filter { $0.isKind(of: BoardView.StoneNode.self) }
-            // If our code is working correctly, there should never be more
-            // than one stone in the same spot on the board.
-            assert(stones.count <= 1)
+        guard let boardNode = boardNode(), let scene = self.scene, let touch = touches.first else {
+            return
+        }
             
+        let location = touch.location(in: scene)
+        let nodes = scene.nodes(at: location)
+        let stones = nodes.filter { $0.isKind(of: BoardView.StoneNode.self) }
+        // If our code is working correctly, there should never be more
+        // than one stone in the same spot on the board.
+        assert(stones.count <= 1)
+        
+        if let moveIndex = moveIndex(for: touch.location(in: boardNode)) {
             if stones.isEmpty {
-                if let boardNode: BoardNode = boardNode {
-                    if let moveIndex = moveIndex(for: touch.location(in: boardNode)) {
-//                        previousBoard = board
-                    let squareToAdd = self.boardSceneDelegate.selectedSquare()
-                        if squareToAdd != .empty {
-                            self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: squareToAdd)
-                        }
+                let squareToAdd = self.boardSceneDelegate.selectedSquare()
+                    if squareToAdd != .empty {
+                        self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: squareToAdd)
                     }
-                }
             } else {
-                if let stoneNode = stones.first {
-                    if let stoneNode = stoneNode as? StoneNode {
-                        if self.boardSceneDelegate.paletteContains(stoneNode: stoneNode) {
-                            self.boardSceneDelegate.makePaletteSelection(stoneNode: stoneNode)
-                        }
+                self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: .empty)
+            }
+        } else {
+            if let stoneNode = stones.first {
+                if let stoneNode = stoneNode as? StoneNode {
+                    if self.boardSceneDelegate.paletteContains(stoneNode: stoneNode) {
+                        self.boardSceneDelegate.makePaletteSelection(stoneNode: stoneNode)
                     }
                 }
             }
