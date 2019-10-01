@@ -135,16 +135,6 @@ class BoardView: SKView {
             self.addChild(foregroundImage)
         }
         
-        override func isEqual(to node: SKNode) -> Bool {
-            var isEqual: Bool = false
-            
-            if let node = node as? StoneNode { // Don't force
-                isEqual = self.imageName == node.imageName
-            }
-            
-            return isEqual
-        }
-        
         var selected: Bool {
             get {
                 return selectedEffectNode.alpha > 0.0
@@ -276,21 +266,18 @@ class BoardView: SKView {
                     if let boardNode = boardNodes.first {
                         if let moveIndex = moveIndex(for: touch.location(in: boardNode)) {
 //                            previousBoard = board
-                            // TODO: Fix force unwraps.
                             self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: paletteSelection)
                         }
                     }
                 }
             } else {
                 if let stoneNode = stones.first {
-                    if stoneNode.isEqual(to: self.boardSceneDelegate.palette[.black]!) {
-                        print("BLACK!")
+                    if stoneNode === self.boardSceneDelegate.palette[.black]! {
                         paletteSelection = .black
                         let stoneNode = stoneNode as! StoneNode
                         stoneNode.selected = true
                         self.boardSceneDelegate.palette[.white]?.selected = false
-                    } else if stoneNode.isEqual(to: self.boardSceneDelegate.palette[.white]!) {
-                        print("WHITE!!!")
+                    } else if stoneNode === self.boardSceneDelegate.palette[.white]! {
                         paletteSelection = .white
                         let stoneNode = stoneNode as! StoneNode
                         stoneNode.selected = true
