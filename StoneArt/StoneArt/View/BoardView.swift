@@ -21,6 +21,8 @@ class BoardView: SKView {
     static let kStoneZPosition = CGFloat(250.0)
     static let kTapTolerance = CGFloat(2.5)
 
+    let boardSceneDelegate = BoardSceneDelegate()
+
     // MARK: BoardMetrics
 
     /**
@@ -62,6 +64,27 @@ class BoardView: SKView {
             let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName, position: CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
             self.palette[.white] = whitePaletteStone
 
+        }
+        
+        func makePaletteSelection(stoneNode: StoneNode) {
+            palette.forEach {
+                $0.value.selected = $0.value === stoneNode
+            }
+        }
+        
+        func selectedSquare() -> Square {
+            var square = Square.empty
+            
+            let selectedNodes = palette.filter {
+                $0.value.selected
+            }
+            assert(selectedNodes.count <= 1)
+            if let node = selectedNodes.first {
+                assert(node.key != .empty)
+                square = node.key
+            }
+            
+            return square
         }
         
         func update(_ currentTime: TimeInterval, for scene: SKScene) {
@@ -145,9 +168,6 @@ class BoardView: SKView {
         }
     }
     
-    let boardSceneDelegate = BoardSceneDelegate()
-    var paletteSelection: Square = .empty
-
     static func boardMetrics() -> BoardMetrics {
         let size = UIScreen.main.bounds.size
         let width = min(size.width, size.height)
@@ -266,22 +286,17 @@ class BoardView: SKView {
                     if let boardNode = boardNodes.first {
                         if let moveIndex = moveIndex(for: touch.location(in: boardNode)) {
 //                            previousBoard = board
-                            self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: paletteSelection)
+                            let square = self.boardSceneDelegate.selectedSquare()
+                            if square != .empty {
+                                self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: square)
+                            }
                         }
                     }
                 }
             } else {
                 if let stoneNode = stones.first {
-                    if stoneNode === self.boardSceneDelegate.palette[.black]! {
-                        paletteSelection = .black
-                        let stoneNode = stoneNode as! StoneNode
-                        stoneNode.selected = true
-                        self.boardSceneDelegate.palette[.white]?.selected = false
-                    } else if stoneNode === self.boardSceneDelegate.palette[.white]! {
-                        paletteSelection = .white
-                        let stoneNode = stoneNode as! StoneNode
-                        stoneNode.selected = true
-                        self.boardSceneDelegate.palette[.black]?.selected = false
+                    if let stoneNode = stoneNode as? StoneNode {
+                        self.boardSceneDelegate.makePaletteSelection(stoneNode: stoneNode)
                     }
                 }
             }
