@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_0" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stone Art" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PdK-cH-DLl" userLabel="Title Label">
-                                <rect key="frame" x="0.0" y="75" width="320" height="33"/>
+                                <rect key="frame" x="0.0" y="65" width="320" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="o0W-ZQ-fC4"/>
                                 </constraints>
@@ -28,18 +26,42 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <skView contentMode="center" allowsTransparency="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IWt-LL-KVg" userLabel="Board View" customClass="BoardView" customModule="StoneArt" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="124" width="320" height="340"/>
+                                <rect key="frame" x="0.0" y="114" width="320" height="340"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="IWt-LL-KVg" secondAttribute="height" multiplier="1:1.0625" id="VRQ-jr-3yh"/>
                                 </constraints>
                             </skView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="qRR-2u-Cn9" userLabel="Buttons">
+                                <rect key="frame" x="0.0" y="518" width="320" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDk-as-NeV">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="30"/>
+                                        <state key="normal" title="New">
+                                            <color key="titleColor" red="1" green="0.8901960784313725" blue="0.070588235294117646" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5X-xN-pDT">
+                                        <rect key="frame" x="160" y="0.0" width="160" height="30"/>
+                                        <state key="normal" title="Undo">
+                                            <color key="titleColor" red="1" green="0.8901960784313725" blue="0.070588235294117646" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7pe-OD-BEy"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qRR-2u-Cn9" secondAttribute="trailing" id="AMR-e1-8QN"/>
                             <constraint firstItem="IWt-LL-KVg" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="INL-Gq-c5V"/>
                             <constraint firstItem="PdK-cH-DLl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OJa-gx-NiB"/>
                             <constraint firstItem="IWt-LL-KVg" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="WxC-dz-xqN"/>
                             <constraint firstItem="PdK-cH-DLl" firstAttribute="bottom" secondItem="IWt-LL-KVg" secondAttribute="top" priority="500" constant="-16" id="lpm-v5-62b"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qRR-2u-Cn9" secondAttribute="bottom" constant="20" id="nyk-5C-XhE"/>
+                            <constraint firstItem="qRR-2u-Cn9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pJK-fb-hhE"/>
+                            <constraint firstItem="qRR-2u-Cn9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="IWt-LL-KVg" secondAttribute="bottom" constant="16" id="pcs-oJ-OAM"/>
                             <constraint firstItem="PdK-cH-DLl" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="IWt-LL-KVg" secondAttribute="top" id="ph2-jL-0L9"/>
                             <constraint firstItem="IWt-LL-KVg" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" priority="750" id="qZ9-rL-aA6"/>
                             <constraint firstItem="IWt-LL-KVg" firstAttribute="width" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="width" id="rmT-fw-SjH"/>
