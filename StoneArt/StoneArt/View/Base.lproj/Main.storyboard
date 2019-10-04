@@ -31,41 +31,40 @@
                                     <constraint firstAttribute="width" secondItem="IWt-LL-KVg" secondAttribute="height" multiplier="1:1.0625" id="VRQ-jr-3yh"/>
                                 </constraints>
                             </skView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="qRR-2u-Cn9" userLabel="Buttons">
-                                <rect key="frame" x="0.0" y="518" width="320" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qRR-2u-Cn9" userLabel="Buttons">
+                                <rect key="frame" x="115" y="470" width="90" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDk-as-NeV">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="37" height="30"/>
                                         <state key="normal" title="New">
                                             <color key="titleColor" red="1" green="0.8901960784313725" blue="0.070588235294117646" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5X-xN-pDT">
-                                        <rect key="frame" x="160" y="0.0" width="160" height="30"/>
+                                        <rect key="frame" x="53" y="0.0" width="37" height="30"/>
                                         <state key="normal" title="Undo">
                                             <color key="titleColor" red="1" green="0.8901960784313725" blue="0.070588235294117646" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="7pe-OD-BEy"/>
+                                    <constraint firstItem="h5X-xN-pDT" firstAttribute="width" secondItem="nDk-as-NeV" secondAttribute="width" id="9JF-Ai-jq7"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qRR-2u-Cn9" secondAttribute="trailing" id="AMR-e1-8QN"/>
+                            <constraint firstItem="qRR-2u-Cn9" firstAttribute="centerX" secondItem="IWt-LL-KVg" secondAttribute="centerX" id="9zd-WE-L3h"/>
                             <constraint firstItem="IWt-LL-KVg" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="INL-Gq-c5V"/>
                             <constraint firstItem="PdK-cH-DLl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OJa-gx-NiB"/>
+                            <constraint firstItem="qRR-2u-Cn9" firstAttribute="top" secondItem="IWt-LL-KVg" secondAttribute="bottom" priority="500" constant="16" id="R3F-F5-5ER"/>
                             <constraint firstItem="IWt-LL-KVg" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="WxC-dz-xqN"/>
                             <constraint firstItem="PdK-cH-DLl" firstAttribute="bottom" secondItem="IWt-LL-KVg" secondAttribute="top" priority="500" constant="-16" id="lpm-v5-62b"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qRR-2u-Cn9" secondAttribute="bottom" constant="20" id="nyk-5C-XhE"/>
-                            <constraint firstItem="qRR-2u-Cn9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pJK-fb-hhE"/>
-                            <constraint firstItem="qRR-2u-Cn9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="IWt-LL-KVg" secondAttribute="bottom" constant="16" id="pcs-oJ-OAM"/>
                             <constraint firstItem="PdK-cH-DLl" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="IWt-LL-KVg" secondAttribute="top" id="ph2-jL-0L9"/>
                             <constraint firstItem="IWt-LL-KVg" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" priority="750" id="qZ9-rL-aA6"/>
                             <constraint firstItem="IWt-LL-KVg" firstAttribute="width" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="width" id="rmT-fw-SjH"/>
                             <constraint firstItem="PdK-cH-DLl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vVa-ec-tNk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="qRR-2u-Cn9" secondAttribute="bottom" id="wiW-G3-J8u"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PdK-cH-DLl" secondAttribute="trailing" id="yKz-MV-x5e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
