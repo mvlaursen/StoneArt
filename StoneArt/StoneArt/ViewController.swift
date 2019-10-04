@@ -15,6 +15,12 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func newGame(_ sender: UIButton) {
+        print("*** New ***")
+    }
+    
+    @IBAction func undoMove(_ sender: UIButton) {
+        print("*** Undo ***")
+    }
 }
 
