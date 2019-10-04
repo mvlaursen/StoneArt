@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
@@ -13,26 +13,43 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="StoneArt" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stone Art" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PdK-cH-DLl" userLabel="Title Label">
-                                <rect key="frame" x="0.0" y="65" width="320" height="33"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stone Art" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="32" translatesAutoresizingMaskIntoConstraints="NO" id="PdK-cH-DLl" userLabel="Title Label">
+                                <rect key="frame" x="0.0" y="83.5" width="375" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="o0W-ZQ-fC4"/>
+                                    <constraint firstAttribute="height" constant="52.5" id="Xh0-xF-kve"/>
+                                    <constraint firstAttribute="height" constant="35" id="sbu-pl-YuK"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="30"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="48"/>
                                 <color key="textColor" red="1" green="0.8901960784313725" blue="0.070588235294117646" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Xh0-xF-kve"/>
+                                        <exclude reference="sbu-pl-YuK"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="sbu-pl-YuK"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="Xh0-xF-kve"/>
+                                    </mask>
+                                </variation>
                             </label>
                             <skView contentMode="center" allowsTransparency="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IWt-LL-KVg" userLabel="Board View" customClass="BoardView" customModule="StoneArt" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="114" width="320" height="340"/>
+                                <rect key="frame" x="0.0" y="134.5" width="375" height="398"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="IWt-LL-KVg" secondAttribute="height" multiplier="1:1.0625" id="VRQ-jr-3yh"/>
                                 </constraints>
                             </skView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qRR-2u-Cn9" userLabel="Buttons">
-                                <rect key="frame" x="115" y="470" width="90" height="30"/>
+                                <rect key="frame" x="142.5" y="548.5" width="90" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDk-as-NeV">
                                         <rect key="frame" x="0.0" y="0.0" width="37" height="30"/>
