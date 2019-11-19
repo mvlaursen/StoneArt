@@ -50,7 +50,8 @@ class BoardView: SKView {
      * Handles updating of the scene, based on the data in the Board model.
      */
     class BoardSceneDelegate: NSObject, SKSceneDelegate {
-        var board = Board()
+        // TODO: Shouldn't create a Board just to toss it away.
+        var board: Board = Board()
         var palette: Dictionary<Square, StoneNode> = [:]
         
         override init() {
@@ -202,6 +203,12 @@ class BoardView: SKView {
         }
     }
 
+    // MARK: Model Access
+    
+    func setBoard(_ board: Board) {
+        self.boardSceneDelegate.board = board
+    }
+
     // MARK: Layout
 
     override func layoutSubviews() {
@@ -242,7 +249,6 @@ class BoardView: SKView {
         }
     }
     
-
     // MARK: Gesture Handling
     
     /**
