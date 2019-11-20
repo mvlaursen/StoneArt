@@ -15,13 +15,12 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
-        if let boardView = boardView {
-            guard let board: Board = game.moves.last else {
-                preconditionFailure()
-            }
-            boardView.setBoard(board)
+        guard let board: Board = game.moves.last else {
+            preconditionFailure()
         }
+        boardView.setBoard(board)
     }
 
     @IBAction func newGame(_ sender: UIButton) {
@@ -36,11 +35,14 @@ class ViewController: UIViewController {
         print("*** Undo ***")
     }
     
-    // Utility
+    // MARK: Utility
     
-    private var boardView: BoardView? {
+    private var boardView: BoardView {
         get {
-            return self.view.viewWithTag(ViewController.kBoardViewTag) as? BoardView
+            guard let boardView = self.view.viewWithTag(ViewController.kBoardViewTag) as? BoardView else {
+                preconditionFailure()
+            }
+            return boardView
         }
     }
 }
