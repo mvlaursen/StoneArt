@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     @IBAction func newGame(_ sender: UIButton) {
         self.game = Game()
         setBoardForBoardView()
+        boardView.resetForNewGame()
     }
     
     @IBAction func undoMove(_ sender: UIButton) {

@@ -82,6 +82,10 @@ class BoardView: SKView {
             }
         }
         
+        func resetForNewGame() {
+            self.palette.forEach { $0.value.selected = false }
+        }
+        
         func selectedSquare() -> Square {
             var square = Square.empty
             
@@ -206,7 +210,11 @@ class BoardView: SKView {
         }
     }
 
-    // MARK: Model Access
+    // MARK: View Control
+    
+    func resetForNewGame() {
+        self.boardSceneDelegate.resetForNewGame()
+    }
     
     func setBoard(_ board: Board) {
         self.boardSceneDelegate.board = board
