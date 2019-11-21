@@ -22,6 +22,9 @@ class BoardView: SKView {
     static let kTapTolerance = CGFloat(2.5)
 
     let boardSceneDelegate = BoardSceneDelegate()
+    
+    // intentional throwaway initialization
+    var addMoveCallback: ((Int, Square) -> Void) = { (_: Int, _: Square) in }
 
     // MARK: BoardMetrics
 
@@ -50,7 +53,8 @@ class BoardView: SKView {
      * Handles updating of the scene, based on the data in the Board model.
      */
     class BoardSceneDelegate: NSObject, SKSceneDelegate {
-        var board = Board()
+        // intentional throwaway initialization
+        var board: Board = Board()
         var palette: Dictionary<Square, StoneNode> = [:]
         
         override init() {
@@ -76,6 +80,10 @@ class BoardView: SKView {
             palette.contains {
                 $0.value === stoneNode
             }
+        }
+        
+        func resetForNewGame() {
+            self.palette.forEach { $0.value.selected = false }
         }
         
         func selectedSquare() -> Square {
@@ -202,6 +210,16 @@ class BoardView: SKView {
         }
     }
 
+    // MARK: View Control
+    
+    func resetForNewGame() {
+        self.boardSceneDelegate.resetForNewGame()
+    }
+    
+    func setBoard(_ board: Board) {
+        self.boardSceneDelegate.board = board
+    }
+
     // MARK: Layout
 
     override func layoutSubviews() {
@@ -242,7 +260,6 @@ class BoardView: SKView {
         }
     }
     
-
     // MARK: Gesture Handling
     
     /**
@@ -301,10 +318,10 @@ class BoardView: SKView {
             if stones.isEmpty {
                 let squareToAdd = self.boardSceneDelegate.selectedSquare()
                     if squareToAdd != .empty {
-                        self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: squareToAdd)
+                        addMoveCallback(moveIndex, squareToAdd)
                     }
             } else {
-                self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: .empty)
+                addMoveCallback(moveIndex, .empty)
             }
         } else {
             if let stoneNode = stones.first {
