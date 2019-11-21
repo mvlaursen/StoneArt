@@ -23,7 +23,8 @@ class BoardView: SKView {
 
     let boardSceneDelegate = BoardSceneDelegate()
     
-    var addMoveCallback: ((Int, Square) -> Void)? = nil
+    // intentional throwaway initialization
+    var addMoveCallback: ((Int, Square) -> Void) = { (_: Int, _: Square) in }
 
     // MARK: BoardMetrics
 
@@ -52,10 +53,7 @@ class BoardView: SKView {
      * Handles updating of the scene, based on the data in the Board model.
      */
     class BoardSceneDelegate: NSObject, SKSceneDelegate {
-        // The Board we will actually use will be passed in by the controller,
-        // but we allocate a throwaway Board here to avoid the hassles of
-        // working with an optional var. It's a hack, but not terribly evil
-        // since Board is a lightweight struct.
+        // intentional throwaway initialization
         var board: Board = Board()
         var palette: Dictionary<Square, StoneNode> = [:]
         
@@ -312,14 +310,10 @@ class BoardView: SKView {
             if stones.isEmpty {
                 let squareToAdd = self.boardSceneDelegate.selectedSquare()
                     if squareToAdd != .empty {
-                        if let addMoveCallback = self.addMoveCallback {
-                            addMoveCallback(moveIndex, squareToAdd)
-                        }
+                        addMoveCallback(moveIndex, squareToAdd)
                     }
             } else {
-                if let addMoveCallback = self.addMoveCallback {
-                    addMoveCallback(moveIndex, .empty)
-                }
+                addMoveCallback(moveIndex, .empty)
             }
         } else {
             if let stoneNode = stones.first {
