@@ -22,6 +22,8 @@ class BoardView: SKView {
     static let kTapTolerance = CGFloat(2.5)
 
     let boardSceneDelegate = BoardSceneDelegate()
+    
+    var addMoveCallback: ((Int, Square) -> Void)? = nil
 
     // MARK: BoardMetrics
 
@@ -310,10 +312,14 @@ class BoardView: SKView {
             if stones.isEmpty {
                 let squareToAdd = self.boardSceneDelegate.selectedSquare()
                     if squareToAdd != .empty {
-                        self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: squareToAdd)
+                        if let addMoveCallback = self.addMoveCallback {
+                            addMoveCallback(moveIndex, squareToAdd)
+                        }
                     }
             } else {
-                self.boardSceneDelegate.board = Board(board: self.boardSceneDelegate.board, index: moveIndex, square: .empty)
+                if let addMoveCallback = self.addMoveCallback {
+                    addMoveCallback(moveIndex, .empty)
+                }
             }
         } else {
             if let stoneNode = stones.first {

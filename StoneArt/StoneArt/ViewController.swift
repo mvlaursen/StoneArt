@@ -17,22 +17,25 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        guard let board: Board = game.moves.last else {
-            preconditionFailure()
-        }
-        boardView.setBoard(board)
+        boardView.addMoveCallback = self.addMove
+        setBoardForBoardView()
     }
 
     @IBAction func newGame(_ sender: UIButton) {
-        print("*** New ***")
-//        if let boardView = boardView {
-//            game = Game()
-//            boardView.board = game.moves.last
-//        }
+        self.game = Game()
+        setBoardForBoardView()
     }
     
     @IBAction func undoMove(_ sender: UIButton) {
-        print("*** Undo ***")
+        self.game.undoMostRecentMove()
+        setBoardForBoardView()
+    }
+    
+    // MARK: Callbacks
+    
+    func addMove(index: Int, square: Square) {
+        self.game.addMove(index: index, square: square)
+        setBoardForBoardView()
     }
     
     // MARK: Utility
@@ -44,6 +47,13 @@ class ViewController: UIViewController {
             }
             return boardView
         }
+    }
+    
+    private func setBoardForBoardView() {
+        guard let board: Board = self.game.moves.last else {
+            preconditionFailure()
+        }
+        boardView.setBoard(board)
     }
 }
 
