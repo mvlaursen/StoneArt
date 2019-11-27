@@ -6,16 +6,16 @@
 //  Copyright © 2019 Appamajigger. All rights reserved.
 //
 
-enum Square: String {
+enum Square: String, CaseIterable {
     case empty = "empty"
     case black = "Black"
-    case blue = "Blue"
-    case brown = "Brown"
-    case cyan = "Cyan"
-    case green = "Green"
-    case magenta = "Magenta"
-    case orange = "Orange"
-    case red = "Red"
     case white = "White"
+    case red = "Red"
+    case orange = "Orange"
     case yellow = "Yellow"
+    case brown = "Brown"
+    case green = "Green"
+    case cyan = "Cyan"
+    case blue = "Blue"
+    case magenta = "Magenta"
 }

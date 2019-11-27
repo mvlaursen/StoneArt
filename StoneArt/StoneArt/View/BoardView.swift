@@ -60,14 +60,16 @@ class BoardView: SKView {
             // Create palette of stones of various colors.
             
             let metrics = BoardView.boardMetrics()
-            
-            // TODO: Need all the colors.
-            let blackPaletteStone = StoneNode(imageNamed: metrics.stoneImageName[.black]!, position: CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
-            self.palette[.black] = blackPaletteStone
-
-            let whitePaletteStone = StoneNode(imageNamed: metrics.stoneImageName[.white]!, position: CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
-            self.palette[.white] = whitePaletteStone
-
+                        
+            var offset = 0
+            for square in Square.allCases {
+                if square == .empty {
+                    continue
+                }
+                let paletteStone = StoneNode(imageNamed: metrics.stoneImageName[square]!, position: CGPoint(x: CGFloat(offset) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
+                self.palette[square] = paletteStone
+                offset += 1
+            }
         }
         
         func makePaletteSelection(stoneNode: StoneNode) {
@@ -124,14 +126,8 @@ class BoardView: SKView {
                     
                     // Add stones to palette area.
                     
-                    assert(palette[.black] != nil)
-                    if let blackStone = palette[.black] {
-                        boardNode.addChild(blackStone)
-                    }
-                    
-                    assert(palette[.white] != nil)
-                    if let whiteStone = palette[.white] {
-                        boardNode.addChild(whiteStone)
+                    for stone in palette {
+                        boardNode.addChild(stone.value)
                     }
                 }
             }
