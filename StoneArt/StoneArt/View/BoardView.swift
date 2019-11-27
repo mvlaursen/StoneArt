@@ -34,8 +34,7 @@ class BoardView: SKView {
     struct BoardMetrics {
         let boardImageName: String
         let squareDim: CGFloat
-        let blackImageName: String
-        let whiteImageName: String
+        let stoneImageName: Dictionary<Square, String>
     }
     
     // MARK: BoardNode
@@ -62,10 +61,11 @@ class BoardView: SKView {
             
             let metrics = BoardView.boardMetrics()
             
-            let blackPaletteStone = StoneNode(imageNamed: metrics.blackImageName, position: CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
+            // TODO: Need all the colors.
+            let blackPaletteStone = StoneNode(imageNamed: metrics.stoneImageName[.black]!, position: CGPoint(x: CGFloat(0) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
             self.palette[.black] = blackPaletteStone
 
-            let whitePaletteStone = StoneNode(imageNamed: metrics.whiteImageName, position: CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
+            let whitePaletteStone = StoneNode(imageNamed: metrics.stoneImageName[.white]!, position: CGPoint(x: CGFloat(1) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
             self.palette[.white] = whitePaletteStone
 
         }
@@ -112,8 +112,11 @@ class BoardView: SKView {
                     for row in 0..<Board.kSquaresPerDim {
                         for column in 0..<Board.kSquaresPerDim {
                             let square = board.squares[Board.indexFrom(row: row, column: column)]
-                            if square == .black || square == .white {
-                                let stone = StoneNode(imageNamed: square == .black ? metrics.blackImageName : metrics.whiteImageName, position: CGPoint(x: CGFloat(column) * metrics.squareDim, y: CGFloat(-row) * metrics.squareDim))
+                            if square != .empty {
+                                guard let stoneImageName = metrics.stoneImageName[square] else {
+                                    preconditionFailure()
+                                }
+                                let stone = StoneNode(imageNamed: stoneImageName, position: CGPoint(x: CGFloat(column) * metrics.squareDim, y: CGFloat(-row) * metrics.squareDim))
                                 boardNode.addChild(stone)
                             }
                         }
@@ -187,17 +190,17 @@ class BoardView: SKView {
         let width = min(size.width, size.height)
         
         if width.isEqual(to: 375.0) {
-            return BoardMetrics(boardImageName: "StoneArtBoard368", squareDim: 23.0, blackImageName: "BlackStone21", whiteImageName: "WhiteStone21")
+            return BoardMetrics(boardImageName: "StoneArtBoard368", squareDim: 23.0, stoneImageName: [.black: "BlackStone21", .blue: "BlueStone21", .brown: "BrownStone21", .cyan: "CyanStone21", .green: "GreenStone21", .magenta: "MagentaStone21", .orange: "OrangeStone21", .red: "RedStone21", .white: "WhiteStone21", .yellow: "YellowStone21"])
         } else if width.isEqual(to: 768.0) {
-            return BoardMetrics(boardImageName: "StoneArtBoard768", squareDim: 48.0, blackImageName: "BlackStone45", whiteImageName: "WhiteStone45")
+            return BoardMetrics(boardImageName: "StoneArtBoard768", squareDim: 48.0, stoneImageName: [.black: "BlackStone45", .blue: "BlueStone45", .brown: "BrownStone45", .cyan: "CyanStone45", .green: "GreenStone45", .magenta: "MagentaStone45", .orange: "OrangeStone45", .red: "RedStone45", .white: "WhiteStone45", .yellow: "YellowStone45"])
         } else if width.isEqual(to: 414.0) {
-            return BoardMetrics(boardImageName: "StoneArtBoard400", squareDim: 25.0, blackImageName: "BlackStone23", whiteImageName: "WhiteStone23")
+            return BoardMetrics(boardImageName: "StoneArtBoard400", squareDim: 25.0, stoneImageName: [.black: "BlackStone23", .blue: "BlueStone23", .brown: "BrownStone23", .cyan: "CyanStone23", .green: "GreenStone23", .magenta: "MagentaStone23", .orange: "OrangeStone23", .red: "RedStone23", .white: "WhiteStone23", .yellow: "YellowStone23"])
         } else if width.isEqual(to: 1024.0) {
-            return BoardMetrics(boardImageName: "StoneArtBoard1024", squareDim: 64.0, blackImageName: "BlackStone60", whiteImageName: "WhiteStone60")
+            return BoardMetrics(boardImageName: "StoneArtBoard1024", squareDim: 64.0, stoneImageName: [.black: "BlackStone60", .blue: "BlueStone60", .brown: "BrownStone60", .cyan: "CyanStone60", .green: "GreenStone60", .magenta: "MagentaStone60", .orange: "OrangeStone60", .red: "RedStone60", .white: "WhiteStone60", .yellow: "YellowStone60"])
         } else if width.isEqual(to: 834.0) {
-            return BoardMetrics(boardImageName: "StoneArtBoard768", squareDim: 48.0, blackImageName: "BlackStone45", whiteImageName: "WhiteStone45")
+            return BoardMetrics(boardImageName: "StoneArtBoard768", squareDim: 48.0, stoneImageName: [.black: "BlackStone45", .blue: "BlueStone45", .brown: "BrownStone45", .cyan: "CyanStone45", .green: "GreenStone45", .magenta: "MagentaStone45", .orange: "OrangeStone45", .red: "RedStone45", .white: "WhiteStone45", .yellow: "YellowStone45"])
         } else {
-            return BoardMetrics(boardImageName: "StoneArtBoard320", squareDim: 20.0, blackImageName: "BlackStone18", whiteImageName: "WhiteStone18")
+            return BoardMetrics(boardImageName: "StoneArtBoard320", squareDim: 20.0, stoneImageName: [.black: "BlackStone18", .blue: "BlueStone18", .brown: "BrownStone18", .cyan: "CyanStone18", .green: "GreenStone18", .magenta: "MagentaStone18", .orange: "OrangeStone18", .red: "RedStone18", .white: "WhiteStone18", .yellow: "YellowStone18"])
         }
     }
     

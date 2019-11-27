@@ -6,8 +6,16 @@
 //  Copyright © 2019 Appamajigger. All rights reserved.
 //
 
-enum Square {
-    case empty
-    case black
-    case white
+enum Square: String {
+    case empty = "empty"
+    case black = "Black"
+    case blue = "Blue"
+    case brown = "Brown"
+    case cyan = "Cyan"
+    case green = "Green"
+    case magenta = "Magenta"
+    case orange = "Orange"
+    case red = "Red"
+    case white = "White"
+    case yellow = "Yellow"
 }
