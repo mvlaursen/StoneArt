@@ -66,7 +66,7 @@ class BoardView: SKView {
                 if square == .empty {
                     continue
                 }
-                let paletteStone = StoneNode(imageNamed: metrics.stoneImageName[square]!, position: CGPoint(x: CGFloat(offset) * metrics.squareDim, y: CGFloat(-Board.kSquaresPerDim) * metrics.squareDim))
+                let paletteStone = StoneNode(imageNamed: metrics.stoneImageName[square]!, position: CGPoint(x: (CGFloat(offset) + 2.5) * metrics.squareDim, y: -(CGFloat(Board.kSquaresPerDim) + 0.1) * metrics.squareDim))
                 self.palette[square] = paletteStone
                 offset += 1
             }
