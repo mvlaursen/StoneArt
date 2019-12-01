@@ -11,6 +11,8 @@
 		3B4894D4231DA861003212F1 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4894D3231DA861003212F1 /* Square.swift */; };
 		3B4894D6231DA8AD003212F1 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4894D5231DA8AD003212F1 /* Board.swift */; };
 		3B4894D8231DAE43003212F1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4894D7231DAE43003212F1 /* Game.swift */; };
+		3B5148092393388F00F17937 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5148082393388F00F17937 /* CoreData.framework */; };
+		3B51480A239360F800F17937 /* SavedGame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B5148012391BA4F00F17937 /* SavedGame.xcdatamodeld */; };
 		3BBD15A123173D860086757A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBD15A023173D860086757A /* AppDelegate.swift */; };
 		3BBD15A323173D860086757A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBD15A223173D860086757A /* ViewController.swift */; };
 		3BBD15A623173D860086757A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BBD15A423173D860086757A /* Main.storyboard */; };
@@ -43,6 +45,8 @@
 		3B4894D3231DA861003212F1 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		3B4894D5231DA8AD003212F1 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		3B4894D7231DAE43003212F1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		3B5148022391BA4F00F17937 /* SavedGame.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SavedGame.xcdatamodel; sourceTree = "<group>"; };
+		3B5148082393388F00F17937 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3BBD159D23173D860086757A /* StoneArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoneArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BBD15A023173D860086757A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BBD15A223173D860086757A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B5148092393388F00F17937 /* CoreData.framework in Frameworks */,
 				3BBD15D0231740970086757A /* SpriteKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,8 +105,9 @@
 			isa = PBXGroup;
 			children = (
 				3B4894D5231DA8AD003212F1 /* Board.swift */,
-				3B4894D3231DA861003212F1 /* Square.swift */,
 				3B4894D7231DAE43003212F1 /* Game.swift */,
+				3B5148012391BA4F00F17937 /* SavedGame.xcdatamodeld */,
+				3B4894D3231DA861003212F1 /* Square.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -160,6 +166,7 @@
 		3BBD15CE231740970086757A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3B5148082393388F00F17937 /* CoreData.framework */,
 				3BBD15CF231740970086757A /* SpriteKit.framework */,
 			);
 			name = Frameworks;
@@ -298,6 +305,7 @@
 			files = (
 				3B4894D4231DA861003212F1 /* Square.swift in Sources */,
 				3B4894D8231DAE43003212F1 /* Game.swift in Sources */,
+				3B51480A239360F800F17937 /* SavedGame.xcdatamodeld in Sources */,
 				3B4894CE23188EA8003212F1 /* BoardView.swift in Sources */,
 				3B4894D6231DA8AD003212F1 /* Board.swift in Sources */,
 				3BBD15A323173D860086757A /* ViewController.swift in Sources */,
@@ -636,6 +644,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3B5148012391BA4F00F17937 /* SavedGame.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3B5148022391BA4F00F17937 /* SavedGame.xcdatamodel */,
+			);
+			currentVersion = 3B5148022391BA4F00F17937 /* SavedGame.xcdatamodel */;
+			path = SavedGame.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3BBD159523173D860086757A /* Project object */;
 }

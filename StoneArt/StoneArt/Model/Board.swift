@@ -32,7 +32,7 @@ struct Board {
      *       A tuple containing the row and column
      */
     static func rowAndColumnFrom(index: Int) -> (row: Int, column: Int) {
-        precondition(index >= 0 && index < Board.kSquaresPerDim)
+        precondition(index >= 0 && index < Board.kSquaresCount)
         let row = index / Board.kSquaresPerDim
         let column = index % Board.kSquaresPerDim
         return (row: row, column: column)
@@ -41,7 +41,13 @@ struct Board {
     init() {
         self.squares = Array.init(repeating: Square.empty, count: Board.kSquaresPerDim * Board.kSquaresPerDim)
     }
-    
+
+    init(squares: [Square]) {
+        precondition(squares.count == Board.kSquaresCount)
+        
+        self.squares = squares
+    }
+
     init(board other: Board, index: Int, square: Square) {
         precondition(index >= 0 && index < Board.kSquaresCount)
         
