@@ -21,6 +21,7 @@
 		3BBD15B623173D870086757A /* StoneArtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBD15B523173D870086757A /* StoneArtTests.swift */; };
 		3BBD15C123173D870086757A /* StoneArtUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBD15C023173D870086757A /* StoneArtUITests.swift */; };
 		3BBD15D0231740970086757A /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBD15CF231740970086757A /* SpriteKit.framework */; };
+		3BC2CE51239EE1EE00AB6C26 /* Game+Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC2CE50239EE1EE00AB6C26 /* Game+Persistence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		3BBD15C023173D870086757A /* StoneArtUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoneArtUITests.swift; sourceTree = "<group>"; };
 		3BBD15C223173D870086757A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BBD15CF231740970086757A /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		3BC2CE50239EE1EE00AB6C26 /* Game+Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Game+Persistence.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 		3BC2CE4F239EE0A900AB6C26 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				3BC2CE50239EE1EE00AB6C26 /* Game+Persistence.swift */,
 				3B5148012391BA4F00F17937 /* SavedGame.xcdatamodeld */,
 			);
 			path = Persistence;
@@ -318,6 +321,7 @@
 				3B4894D6231DA8AD003212F1 /* Board.swift in Sources */,
 				3BBD15A323173D860086757A /* ViewController.swift in Sources */,
 				3BBD15A123173D860086757A /* AppDelegate.swift in Sources */,
+				3BC2CE51239EE1EE00AB6C26 /* Game+Persistence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
