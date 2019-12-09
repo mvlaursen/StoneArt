@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="SavedBoard" representedClassName="SavedBoard" syncable="YES" codeGenerationType="class">
-        <attribute name="squares" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
+        <attribute name="squares" attributeType="Transformable" valueTransformerName="" customClassName="Array&lt;String&gt;"/>
     </entity>
     <entity name="SavedGame" representedClassName="SavedGame" syncable="YES" codeGenerationType="class">
-        <attribute name="moves" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[SavedBoard]"/>
+        <attribute name="moves" attributeType="Transformable" valueTransformerName="" customClassName="Array&lt;SavedBoard&gt;"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify"/>
     </entity>
     <elements>
         <element name="SavedBoard" positionX="-54" positionY="-9" width="128" height="58"/>
-        <element name="SavedGame" positionX="-293.9296875" positionY="-10.9765625" width="128" height="58"/>
+        <element name="SavedGame" positionX="-293.9296875" positionY="-10.9765625" width="128" height="73"/>
     </elements>
 </model>
