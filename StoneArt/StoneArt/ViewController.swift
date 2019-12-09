@@ -91,7 +91,7 @@ class ViewController: UIViewController {
         let context = appDelegate.persistentContainer.viewContext
         
         do {
-            let savedGames: [Any] = try context.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: "SavedGame"))
+            let savedGames = try context.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: "SavedGame"))
 
             assert((0...1).contains(savedGames.count))
             if savedGames.count > 0 {
@@ -99,6 +99,10 @@ class ViewController: UIViewController {
                     var serialization: [[String]] = []
                     if let moves = savedGame.moves {
                         for savedBoard in moves {
+                            guard let savedBoard = savedBoard as? SavedBoard else {
+                                assertionFailure()
+                                return // TODO Work on this.
+                            }
                             var strings: [String] = []
                             if let squares = savedBoard.squares {
                                 for s in squares {
@@ -106,10 +110,10 @@ class ViewController: UIViewController {
                                 }
                                 serialization.append(strings)
                             }
+                    
+                            self.game.deserialize(moves: serialization)
                         }
                     }
-                    
-                    self.game.deserialize(moves: serialization)
                 }
             }
         } catch {
@@ -129,9 +133,9 @@ class ViewController: UIViewController {
         let savedGame = SavedGame(entity: edGame!, insertInto: context)
         let serialization: [[String]] = game.serialize()
         
-        let edBoard = NSEntityDescription.entity(forEntityName: "SavedBoard", in: context)
-        
+        let moves: NSMutableOrderedSet = []
         for outer in serialization {
+            let edBoard = NSEntityDescription.entity(forEntityName: "SavedBoard", in: context)
             let savedBoard = SavedBoard(entity: edBoard!, insertInto: context)
             for inner in outer {
                 if savedBoard.squares == nil {
@@ -139,11 +143,9 @@ class ViewController: UIViewController {
                 }
                 savedBoard.squares?.append(inner)
             }
-            if savedGame.moves == nil {
-                savedGame.moves = []
-            }
-            savedGame.moves?.append(savedBoard)
+            moves.add(savedBoard)
         }
+        savedGame.moves = moves
     }
 }
 

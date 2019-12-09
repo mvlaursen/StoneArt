@@ -4,11 +4,10 @@
         <attribute name="squares" attributeType="Transformable" valueTransformerName="" customClassName="Array&lt;String&gt;"/>
     </entity>
     <entity name="SavedGame" representedClassName="SavedGame" syncable="YES" codeGenerationType="class">
-        <attribute name="moves" attributeType="Transformable" valueTransformerName="" customClassName="Array&lt;SavedBoard&gt;"/>
-        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify"/>
+        <relationship name="moves" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SavedBoard"/>
     </entity>
     <elements>
         <element name="SavedBoard" positionX="-54" positionY="-9" width="128" height="58"/>
-        <element name="SavedGame" positionX="-293.9296875" positionY="-10.9765625" width="128" height="73"/>
+        <element name="SavedGame" positionX="-293.9296875" positionY="-10.9765625" width="128" height="58"/>
     </elements>
 </model>
