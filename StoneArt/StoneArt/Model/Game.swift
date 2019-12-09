@@ -6,20 +6,12 @@
 //  Copyright © 2019 Appamajigger. All rights reserved.
 //
 
-import CoreData
-
 class Game {
     var moves = [Board.init()]
     
     init() {
     }
-    
-    init(savedGame: SavedGame) {
-        // TODO: Replace this dummy saved game restoration with the real thing.
-        let board = Board(squares: Array.init(repeating: Square.blue, count: Board.kSquaresCount))
-        moves = [board]
-    }
-    
+        
     func addMove(index: Int, square: Square) {
         precondition(moves.count > 0)
         moves.append(Board.init(board: moves.last!, index: index, square: square))
@@ -30,5 +22,41 @@ class Game {
             moves.removeLast()
         }
         assert(moves.count > 0)
+    }
+    
+    // MARK: Serialization
+    // TODO: Write unit tests for this stuff.
+
+    func deserialize(moves: [[String]]) {
+        self.moves.removeAll()
+        
+        for move in moves {
+            var squares: [Square] = []
+            
+            for square in move {
+                squares.append(.green) // TODO: Real implementation.
+            }
+            
+            assert(squares.count == Board.kSquaresCount)
+            let board = Board(squares: squares)
+            self.moves.append(board)
+        }
+    }
+
+    func serialize() -> [[String]] {
+        var moves: [[String]] = []
+        
+        for move in self.moves {
+            var squares: [String] = []
+            
+            for square in move.squares {
+                squares.append(square.rawValue)
+            }
+            
+            assert(squares.count == Board.kSquaresCount)
+            moves.append(squares)
+        }
+        
+        return moves
     }
 }

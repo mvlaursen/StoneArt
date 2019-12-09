@@ -106,7 +106,6 @@
 			children = (
 				3B4894D5231DA8AD003212F1 /* Board.swift */,
 				3B4894D7231DAE43003212F1 /* Game.swift */,
-				3B5148012391BA4F00F17937 /* SavedGame.xcdatamodeld */,
 				3B4894D3231DA861003212F1 /* Square.swift */,
 			);
 			path = Model;
@@ -139,6 +138,7 @@
 				3B4894D2231DA843003212F1 /* Model */,
 				3BBD15A023173D860086757A /* AppDelegate.swift */,
 				3BBD15AC23173D870086757A /* Info.plist */,
+				3B5148012391BA4F00F17937 /* SavedGame.xcdatamodeld */,
 				3BBD15A223173D860086757A /* ViewController.swift */,
 				3B43D3C923176023004FDDA0 /* View */,
 			);
