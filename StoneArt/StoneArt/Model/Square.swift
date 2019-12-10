@@ -18,4 +18,17 @@ enum Square: String, CaseIterable {
     case cyan = "Cyan"
     case blue = "Blue"
     case magenta = "Magenta"
+    
+    static func fromString(_ s: String) -> Square {
+        var square: Square = .empty
+        
+        for value in Square.allCases {
+            if value.rawValue == s {
+                square = value
+                break
+            }
+        }
+        
+        return square
+    }
 }

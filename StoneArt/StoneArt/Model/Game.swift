@@ -34,7 +34,7 @@ class Game {
             var squares: [Square] = []
             
             for s in move {
-                squares.append(.green) // TODO: Real implementation.
+                squares.append(Square.fromString(s))
             }
             
             assert(squares.count == Board.kSquaresCount)
