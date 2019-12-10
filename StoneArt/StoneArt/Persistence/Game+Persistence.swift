@@ -12,11 +12,13 @@ import Foundation
 extension Game {
     static func deleteSavedGames(persistentContext context: NSManagedObjectContext) {
         do {
-            let savedGames: [Any] = try context.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: "SavedGame"))
-            savedGames.forEach({ (element) in
-                if let nsmo = element as? NSManagedObject {
-                    context.delete(nsmo)
+            let entities = try context.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: "SavedGame"))
+            entities.forEach({ (entity) in
+                guard let managedObject = entity as? NSManagedObject else {
+                    preconditionFailure()
+                    return
                 }
+                context.delete(managedObject)
             })
         } catch {
             // TODO: Replace this implementation with code to handle the error appropriately.
