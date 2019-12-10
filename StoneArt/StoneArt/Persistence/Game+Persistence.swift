@@ -67,22 +67,30 @@ extension Game {
     func saveGame(persistentContext context: NSManagedObjectContext) {
         Game.deleteSavedGames(persistentContext: context)
         
-        let edGame = NSEntityDescription.entity(forEntityName: "SavedGame", in: context)
-        let savedGame = SavedGame(entity: edGame!, insertInto: context)
-        let serialization: [[String]] = self.serialize()
-        
-        let moves: NSMutableOrderedSet = []
-        for outer in serialization {
-            let edBoard = NSEntityDescription.entity(forEntityName: "SavedBoard", in: context)
-            let savedBoard = SavedBoard(entity: edBoard!, insertInto: context)
-            for inner in outer {
-                if savedBoard.squares == nil {
-                    savedBoard.squares = []
-                }
-                savedBoard.squares?.append(inner)
-            }
-            moves.add(savedBoard)
+        guard let entityDescriptionSavedGame = NSEntityDescription.entity(forEntityName: "SavedGame", in: context) else {
+            preconditionFailure()
+            return
         }
-        savedGame.moves = moves
+        let savedGame = SavedGame(entity: entityDescriptionSavedGame, insertInto: context)
+        let movesAsStrings: [[String]] = self.serialize()
+        
+        let savedBoards: NSMutableOrderedSet = []
+        for squaresAsStrings in movesAsStrings {
+            guard let entityDescriptionSavedBoard = NSEntityDescription.entity(forEntityName: "SavedBoard", in: context) else {
+                preconditionFailure()
+                return
+            }
+            
+            let savedBoard = SavedBoard(entity: entityDescriptionSavedBoard, insertInto: context)
+            if savedBoard.squares == nil {
+                savedBoard.squares = []
+            }
+            precondition(savedBoard.squares != nil)
+            for squareAsString in squaresAsStrings {
+                savedBoard.squares?.append(squareAsString)
+            }
+            savedBoards.add(savedBoard)
+        }
+        savedGame.moves = savedBoards
     }
 }
