@@ -22,11 +22,11 @@ enum Square: String, CaseIterable {
     static func fromString(_ s: String) -> Square {
         var square: Square = .empty
         
-        for value in Square.allCases {
-            if value.rawValue == s {
-                square = value
-                break
-            }
+        let matches = Square.allCases.filter({ (square) -> Bool in
+            square.rawValue == s })
+        if matches.count > 0 {
+            assert(matches.count == 1)
+            square = matches[0]
         }
         
         return square
