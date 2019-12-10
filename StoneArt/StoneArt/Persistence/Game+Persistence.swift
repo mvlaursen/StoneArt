@@ -31,27 +31,27 @@ extension Game {
     
     func fetchSavedGame(persistentContext context: NSManagedObjectContext) {
         do {
-            let savedGames = try context.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: "SavedGame"))
+            let entities = try context.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: "SavedGame"))
 
-            assert((0...1).contains(savedGames.count))
-            if savedGames.count > 0 {
-                guard let savedGame = savedGames.first as? SavedGame, let moves = savedGame.moves else {
+            assert((0...1).contains(entities.count))
+            if entities.count > 0 {
+                guard let savedGame = entities.first as? SavedGame, let moves = savedGame.moves else {
                     preconditionFailure()
                     return
                 }
 
                 var movesAsStrings: [[String]] = []
-                for savedBoard in moves {
-                    guard let savedBoard = savedBoard as? SavedBoard, let squares = savedBoard.squares else {
+                for move in moves {
+                    guard let savedBoard = move as? SavedBoard, let squares = savedBoard.squares else {
                         preconditionFailure()
                         return
                     }
                         
-                    var strings: [String] = []
-                    for s in squares {
-                        strings.append(s)
+                    var squaresAsStrings: [String] = []
+                    for squareAsString in squares {
+                        squaresAsStrings.append(squareAsString)
                     }
-                    movesAsStrings.append(strings)
+                    movesAsStrings.append(squaresAsStrings)
                 }
                 
                 self.deserialize(moves: movesAsStrings)
