@@ -33,7 +33,7 @@ class Game {
         for move in moves {
             var squares: [Square] = []
             
-            for square in move {
+            for s in move {
                 squares.append(.green) // TODO: Real implementation.
             }
             
