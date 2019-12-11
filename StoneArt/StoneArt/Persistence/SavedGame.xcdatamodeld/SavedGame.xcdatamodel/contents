@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="SavedBoard" representedClassName="SavedBoard" syncable="YES" codeGenerationType="class">
         <attribute name="squares" attributeType="Transformable" valueTransformerName="" customClassName="Array&lt;String&gt;"/>
+        <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SavedGame" inverseName="moves" inverseEntity="SavedGame"/>
     </entity>
     <entity name="SavedGame" representedClassName="SavedGame" syncable="YES" codeGenerationType="class">
-        <relationship name="moves" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SavedBoard"/>
+        <relationship name="moves" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SavedBoard" inverseName="game" inverseEntity="SavedBoard"/>
     </entity>
     <elements>
-        <element name="SavedBoard" positionX="-54" positionY="-9" width="128" height="58"/>
+        <element name="SavedBoard" positionX="-54" positionY="-9" width="128" height="73"/>
         <element name="SavedGame" positionX="-293.9296875" positionY="-10.9765625" width="128" height="58"/>
     </elements>
 </model>
