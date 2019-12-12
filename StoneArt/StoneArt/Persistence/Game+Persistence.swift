@@ -15,13 +15,13 @@ extension Game {
             let entities = try context.fetch(NSFetchRequest<NSFetchRequestResult>(entityName: "SavedGame"))
             entities.forEach({ (entity) in
                 guard let managedObject = entity as? NSManagedObject else {
-                    preconditionFailure("Fetched entity is not an NSManagedObject.")
+                    fatalError("Fetched entity is not an NSManagedObject.")
                 }
                 context.delete(managedObject)
             })
         } catch {
             let nserror = error as NSError
-            preconditionFailure("Unresolved error fetching SavedGame entities: \(nserror), \(nserror.userInfo)")
+            fatalError("Unresolved error fetching SavedGame entities: \(nserror), \(nserror.userInfo)")
         }
 
     }
@@ -33,13 +33,13 @@ extension Game {
             assert((0...1).contains(entities.count))
             if entities.count > 0 {
                 guard let savedGame = entities.first as? SavedGame, let moves = savedGame.moves else {
-                    preconditionFailure("Fetched entity is not a SavedGame or has no 'moves' relationship.")
+                    fatalError("Fetched entity is not a SavedGame or has no 'moves' relationship.")
                 }
 
                 var movesAsStrings: [[String]] = []
                 for move in moves {
                     guard let savedBoard = move as? SavedBoard, let squares = savedBoard.squares else {
-                        preconditionFailure("Entity is not a SavedBoard or has no 'squares' attribute.")
+                        fatalError("Entity is not a SavedBoard or has no 'squares' attribute.")
                     }
                         
                     var squaresAsStrings: [String] = []

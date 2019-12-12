@@ -32,7 +32,6 @@ class ViewController: UIViewController {
     
     @IBAction func undoMove(_ sender: UIButton) {
         self.game.undoMostRecentMove()
-        // TODO: This is pretty brute force. Should be able to undo one move from SavedGame.
         game.saveGame(persistentContext: persistentContext())
         setBoardForBoardView()
     }
@@ -41,7 +40,6 @@ class ViewController: UIViewController {
     
     func addMove(index: Int, square: Square) {
         self.game.addMove(index: index, square: square)
-        // TODO: This is pretty brute force. Should be able to add one move to SavedGame.
         game.saveGame(persistentContext: persistentContext())
         setBoardForBoardView()
     }
@@ -51,7 +49,7 @@ class ViewController: UIViewController {
     private var boardView: BoardView {
         get {
             guard let boardView = self.view.viewWithTag(ViewController.kBoardViewTag) as? BoardView else {
-                preconditionFailure()
+                fatalError("BoardView should be in view hierarchy.")
             }
             return boardView
         }
@@ -65,7 +63,7 @@ class ViewController: UIViewController {
 
     private func setBoardForBoardView() {
         guard let board: Board = self.game.moves.last else {
-            preconditionFailure()
+            fatalError("Board should always have at least one move.")
         }
         boardView.setBoard(board)
     }
