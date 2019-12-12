@@ -6,6 +6,7 @@
 //  Copyright © 2019 Appamajigger. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
 class ViewController: UIViewController {
@@ -18,10 +19,12 @@ class ViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         boardView.addMoveCallback = self.addMove
+        game.fetchSavedGame(persistentContext: persistentContext())
         setBoardForBoardView()
     }
 
     @IBAction func newGame(_ sender: UIButton) {
+        Game.deleteSavedGames(persistentContext: persistentContext())
         self.game = Game()
         setBoardForBoardView()
         boardView.resetForNewGame()
@@ -29,6 +32,7 @@ class ViewController: UIViewController {
     
     @IBAction func undoMove(_ sender: UIButton) {
         self.game.undoMostRecentMove()
+        game.saveGame(persistentContext: persistentContext())
         setBoardForBoardView()
     }
     
@@ -36,6 +40,7 @@ class ViewController: UIViewController {
     
     func addMove(index: Int, square: Square) {
         self.game.addMove(index: index, square: square)
+        game.saveGame(persistentContext: persistentContext())
         setBoardForBoardView()
     }
     
@@ -44,17 +49,22 @@ class ViewController: UIViewController {
     private var boardView: BoardView {
         get {
             guard let boardView = self.view.viewWithTag(ViewController.kBoardViewTag) as? BoardView else {
-                preconditionFailure()
+                fatalError("BoardView should be in view hierarchy.")
             }
             return boardView
         }
     }
     
+    private func persistentContext() -> NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        return context
+    }
+
     private func setBoardForBoardView() {
         guard let board: Board = self.game.moves.last else {
-            preconditionFailure()
+            fatalError("Board should always have at least one move.")
         }
         boardView.setBoard(board)
     }
 }
-

@@ -18,4 +18,17 @@ enum Square: String, CaseIterable {
     case cyan = "Cyan"
     case blue = "Blue"
     case magenta = "Magenta"
+    
+    static func fromString(_ s: String) -> Square {
+        var square: Square = .empty
+        
+        let matches = Square.allCases.filter({ (square) -> Bool in
+            square.rawValue == s })
+        if matches.count > 0 {
+            assert(matches.count == 1)
+            square = matches[0]
+        }
+        
+        return square
+    }
 }

@@ -116,7 +116,7 @@ class BoardView: SKView {
                             let square = board.squares[Board.indexFrom(row: row, column: column)]
                             if square != .empty {
                                 guard let stoneImageName = metrics.stoneImageName[square] else {
-                                    preconditionFailure()
+                                    fatalError("No image for square type.")
                                 }
                                 let stone = StoneNode(imageNamed: stoneImageName, position: CGPoint(x: CGFloat(column) * metrics.squareDim, y: CGFloat(-row) * metrics.squareDim))
                                 boardNode.addChild(stone)
