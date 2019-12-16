@@ -9,26 +9,32 @@
 import XCTest
 @testable import StoneArt
 
+extension Board: Equatable {
+    public static func == (lhs: Board, rhs: Board) -> Bool {
+        guard lhs.squares.count == Board.kSquaresCount,
+            lhs.squares.count == rhs.squares.count else {
+            return false
+        }
+        
+        let pairedSquares = zip(lhs.squares, rhs.squares)
+        let allSquaresMatch = pairedSquares.reduce(true, { (squaresMatch, pairedSquare) -> Bool in
+            squaresMatch && (pairedSquare.0 == pairedSquare.1)
+        })
+        return allSquaresMatch
+    }
+}
+
 extension Game: Equatable {
     public static func == (lhs: Game, rhs: Game) -> Bool {
-        if lhs.moves.count != rhs.moves.count {
+        guard lhs.moves.count == rhs.moves.count else {
             return false
         }
         
         let pairedMoves = zip(lhs.moves, rhs.moves)
-        for pairedMove in pairedMoves {
-            XCTAssertEqual(pairedMove.0.squares.count, Board.kSquaresCount)
-            XCTAssertEqual(pairedMove.0.squares.count, pairedMove.1.squares.count)
-            
-            let pairedSquares = zip(pairedMove.0.squares, pairedMove.1.squares)
-            for pairedSquare in pairedSquares {
-                if pairedSquare.0 != pairedSquare.1 {
-                    return false
-                }
-            }
+        let allMovesMatch = pairedMoves.reduce(true) { (movesMatch, pairedMove) -> Bool in
+            movesMatch && (pairedMove.0 == pairedMove.1)
         }
-        
-        return true
+        return allMovesMatch
     }
 }
 
@@ -54,6 +60,7 @@ class StoneArtTests: XCTestCase {
         let game = Game.init()
         game.addMove(index: 0, square: Square.black)
         game.addMove(index: 1, square: Square.white)
+        
         XCTAssertEqual(game.moves.count, 3)
 
         XCTAssertTrue(game.moves[0].squares.allSatisfy({ (square) -> Bool in

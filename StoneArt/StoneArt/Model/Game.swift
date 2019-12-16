@@ -25,7 +25,6 @@ class Game {
     }
     
     // MARK: Serialization
-    // TODO: Write unit tests for this stuff.
 
     func deserialize(moves: [[String]]) {
         self.moves.removeAll()
