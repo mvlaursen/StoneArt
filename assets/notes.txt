@@ -1,0 +1,3 @@
+The StoneArtBoard* images were created with the online Photopea editor.
+
+I don't remember what editor was used to create the GomokuBoard* images, which were copied from the Gomoku project.
