@@ -9,6 +9,35 @@
 import XCTest
 @testable import StoneArt
 
+extension Board: Equatable {
+    public static func == (lhs: Board, rhs: Board) -> Bool {
+        guard lhs.squares.count == Board.kSquaresCount,
+            lhs.squares.count == rhs.squares.count else {
+            return false
+        }
+        
+        let pairedSquares = zip(lhs.squares, rhs.squares)
+        let allSquaresMatch = pairedSquares.reduce(true, { (squaresMatch, pairedSquare) -> Bool in
+            squaresMatch && (pairedSquare.0 == pairedSquare.1)
+        })
+        return allSquaresMatch
+    }
+}
+
+extension Game: Equatable {
+    public static func == (lhs: Game, rhs: Game) -> Bool {
+        guard lhs.moves.count == rhs.moves.count else {
+            return false
+        }
+        
+        let pairedMoves = zip(lhs.moves, rhs.moves)
+        let allMovesMatch = pairedMoves.reduce(true) { (movesMatch, pairedMove) -> Bool in
+            movesMatch && (pairedMove.0 == pairedMove.1)
+        }
+        return allMovesMatch
+    }
+}
+
 class StoneArtTests: XCTestCase {
 
     override func setUp() {
@@ -31,7 +60,7 @@ class StoneArtTests: XCTestCase {
         let game = Game.init()
         game.addMove(index: 0, square: Square.black)
         game.addMove(index: 1, square: Square.white)
-
+        
         XCTAssertEqual(game.moves.count, 3)
 
         XCTAssertTrue(game.moves[0].squares.allSatisfy({ (square) -> Bool in
@@ -67,6 +96,21 @@ class StoneArtTests: XCTestCase {
         XCTAssertEqual(game.moves.count, 1)
         game.undoMostRecentMove()
         XCTAssertEqual(game.moves.count, 1)
+    }
+    
+    func testGameSerialization() {
+        let game1 = Game.init()
+        game1.addMove(index: 0, square: Square.black)
+        game1.addMove(index: 1, square: Square.white)
+        XCTAssertEqual(game1.moves.count, 3)
+        
+        let movesAsStrings = game1.serialize()
+        XCTAssertEqual(movesAsStrings.count, 3)
+        
+        let game2 = Game.init()
+        game2.deserialize(moves: movesAsStrings)
+        
+        XCTAssertEqual(game1, game2)
     }
 
     func testPerformanceExample() {
