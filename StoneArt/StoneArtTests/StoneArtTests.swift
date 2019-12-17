@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import StoneArt
+@testable import Go_Stone_Art
 
 extension Board: Equatable {
     public static func == (lhs: Board, rhs: Board) -> Bool {
