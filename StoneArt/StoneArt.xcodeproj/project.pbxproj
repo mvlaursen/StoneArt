@@ -626,7 +626,7 @@
 				3BBD15C423173D870086757A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		3BBD15C523173D870086757A /* Build configuration list for PBXNativeTarget "StoneArt" */ = {
 			isa = XCConfigurationList;
@@ -635,7 +635,7 @@
 				3BBD15C723173D870086757A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		3BBD15C823173D870086757A /* Build configuration list for PBXNativeTarget "StoneArtTests" */ = {
 			isa = XCConfigurationList;
@@ -644,7 +644,7 @@
 				3BBD15CA23173D870086757A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		3BBD15CB23173D870086757A /* Build configuration list for PBXNativeTarget "StoneArtUITests" */ = {
 			isa = XCConfigurationList;
@@ -653,7 +653,7 @@
 				3BBD15CD23173D870086757A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 
