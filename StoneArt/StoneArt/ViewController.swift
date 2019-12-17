@@ -11,6 +11,7 @@ import UIKit
 
 class ViewController: UIViewController {
     static let kBoardViewTag = 100
+    static let kPrivacyPolicyUrl = "https://mvlaursen.github.io/GoStoneArt"
     
     var game = Game()
 
@@ -23,6 +24,12 @@ class ViewController: UIViewController {
         setBoardForBoardView()
     }
 
+    @IBAction func privacyPolicy(_ sender: UIButton) {
+        if let url = URL(string: ViewController.kPrivacyPolicyUrl) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
     @IBAction func newGame(_ sender: UIButton) {
         Game.deleteSavedGames(persistentContext: persistentContext())
         self.game = Game()
