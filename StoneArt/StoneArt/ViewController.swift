@@ -11,7 +11,6 @@ import UIKit
 
 class ViewController: UIViewController {
     static let kBoardViewTag = 100
-    static let kPrivacyPolicyUrl = "https://mvlaursen.github.io/GoStoneArt"
     
     var game = Game()
 
@@ -22,12 +21,6 @@ class ViewController: UIViewController {
         boardView.addMoveCallback = self.addMove
         game.fetchSavedGame(persistentContext: persistentContext())
         setBoardForBoardView()
-    }
-
-    @IBAction func privacyPolicy(_ sender: UIButton) {
-        if let url = URL(string: ViewController.kPrivacyPolicyUrl) {
-            UIApplication.shared.open(url)
-        }
     }
     
     @IBAction func newGame(_ sender: UIButton) {
@@ -51,6 +44,11 @@ class ViewController: UIViewController {
         setBoardForBoardView()
     }
     
+    // MARK: Navigation
+    
+    @IBAction func unwindToMainView(_ unwindSegue: UIStoryboardSegue) {
+    }
+
     // MARK: Utility
     
     private var boardView: BoardView {
