@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import StoneArt
+@testable import Go_Stone_Art
 
 extension Board: Equatable {
     public static func == (lhs: Board, rhs: Board) -> Bool {
@@ -113,11 +113,11 @@ class StoneArtTests: XCTestCase {
         XCTAssertEqual(game1, game2)
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+//    func testPerformanceExample() {
+//        // This is an example of a performance test case.
+//        self.measure {
+//            // Put the code you want to measure the time of here.
+//        }
+//    }
 
 }

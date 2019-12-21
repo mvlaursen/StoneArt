@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         game.fetchSavedGame(persistentContext: persistentContext())
         setBoardForBoardView()
     }
-
+    
     @IBAction func newGame(_ sender: UIButton) {
         Game.deleteSavedGames(persistentContext: persistentContext())
         self.game = Game()
@@ -44,6 +44,11 @@ class ViewController: UIViewController {
         setBoardForBoardView()
     }
     
+    // MARK: Navigation
+    
+    @IBAction func unwindToMainView(_ unwindSegue: UIStoryboardSegue) {
+    }
+
     // MARK: Utility
     
     private var boardView: BoardView {

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="StoneArt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Main" id="BYZ-38-t0r" customClass="ViewController" customModule="Go_Stone_Art" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stone Art" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="PdK-cH-DLl" userLabel="Title Label">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go Stone Art" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="PdK-cH-DLl" userLabel="Title Label">
                                 <rect key="frame" x="0.0" y="60" width="320" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="72" id="Xh0-xF-kve"/>
@@ -42,7 +42,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <skView tag="100" contentMode="center" allowsTransparency="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IWt-LL-KVg" userLabel="Board View" customClass="BoardView" customModule="StoneArt" customModuleProvider="target">
+                            <skView tag="100" contentMode="center" allowsTransparency="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IWt-LL-KVg" userLabel="Board View" customClass="BoardView" customModule="Go_Stone_Art" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="114" width="320" height="340"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="IWt-LL-KVg" secondAttribute="height" multiplier="1:1.0625" id="VRQ-jr-3yh"/>
@@ -86,6 +86,16 @@
                                     <constraint firstItem="h5X-xN-pDT" firstAttribute="width" secondItem="nDk-as-NeV" secondAttribute="width" id="9JF-Ai-jq7"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lV6-lx-dKT">
+                                <rect key="frame" x="126.5" y="524" width="67" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <state key="normal" title="Privacy Policy">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="KWL-6C-YCS" kind="show" id="GFK-zv-jxc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -94,6 +104,8 @@
                             <constraint firstItem="PdK-cH-DLl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OJa-gx-NiB"/>
                             <constraint firstItem="qRR-2u-Cn9" firstAttribute="top" secondItem="IWt-LL-KVg" secondAttribute="bottom" priority="500" constant="16" id="R3F-F5-5ER"/>
                             <constraint firstItem="IWt-LL-KVg" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="WxC-dz-xqN"/>
+                            <constraint firstItem="lV6-lx-dKT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YGD-Nq-qQo"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lV6-lx-dKT" secondAttribute="bottom" constant="20" id="Yy3-9D-6K6"/>
                             <constraint firstItem="PdK-cH-DLl" firstAttribute="bottom" secondItem="IWt-LL-KVg" secondAttribute="top" priority="500" constant="-16" id="lpm-v5-62b"/>
                             <constraint firstItem="PdK-cH-DLl" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="IWt-LL-KVg" secondAttribute="top" id="ph2-jL-0L9"/>
                             <constraint firstItem="IWt-LL-KVg" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" priority="750" id="qZ9-rL-aA6"/>
@@ -104,10 +116,66 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="wCA-Ya-XgX"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.25" y="118.30985915492958"/>
+            <point key="canvasLocation" x="2105.625" y="115.14084507042254"/>
+        </scene>
+        <!--Privacy Policy-->
+        <scene sceneID="a6m-Tm-rcq">
+            <objects>
+                <viewController title="Privacy Policy" id="KWL-6C-YCS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1w4-y2-zBs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01r-Pr-AVK">
+                                <rect key="frame" x="92" y="20" width="136.5" height="26.5"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="24"/>
+                                <color key="textColor" red="1" green="0.89019607840000003" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cCH-Wq-5XK">
+                                <rect key="frame" x="16" y="54.5" width="288" height="434.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <string key="text">Go Stone Art is a simple iOS app, intended as casual entertainment for children. It does not ask you or your child for any personal information nor collect any personal information. Appamajigger cannot look at nor collect any pictures drawn in Go Stone Art.
+
+Go Stone Art does collect information for purposes of app maintenance and bug fixing, such as your device type, iOS version, and crash data. This information is collected via Apple-provided mechanisms that are built into the App Store. Apple ensures that this type of information is anonymous and cannot be traced back to you. For more information on how you can control iOS's sharing diagnostic information, such as crash data, with app developers, see:  https://support.apple.com/en-us/HT202100  Updated December 17th, 2019 [v1.0.0]</string>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4W-Se-p5h">
+                                <rect key="frame" x="142.5" y="497" width="35" height="31"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" red="1" green="0.89019607840000003" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="omV-4f-5g1" kind="unwind" unwindAction="unwindToMainView:" id="yTr-dL-80a"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.40386661889999997" green="0.20070174339999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="01r-Pr-AVK" firstAttribute="top" secondItem="9g2-A9-g2x" secondAttribute="top" constant="20" id="5CG-ZY-HgZ"/>
+                            <constraint firstItem="9g2-A9-g2x" firstAttribute="bottom" secondItem="b4W-Se-p5h" secondAttribute="bottom" constant="20" id="7kr-hE-Oum"/>
+                            <constraint firstItem="cCH-Wq-5XK" firstAttribute="top" secondItem="01r-Pr-AVK" secondAttribute="bottom" constant="8" symbolic="YES" id="Dh2-hR-Cyz"/>
+                            <constraint firstItem="b4W-Se-p5h" firstAttribute="centerX" secondItem="1w4-y2-zBs" secondAttribute="centerX" id="Mgy-L0-LET"/>
+                            <constraint firstItem="9g2-A9-g2x" firstAttribute="trailing" secondItem="cCH-Wq-5XK" secondAttribute="trailing" constant="16" id="NOO-Lh-WZz"/>
+                            <constraint firstItem="cCH-Wq-5XK" firstAttribute="leading" secondItem="9g2-A9-g2x" secondAttribute="leading" constant="16" id="SdH-mv-LfA"/>
+                            <constraint firstItem="01r-Pr-AVK" firstAttribute="centerX" secondItem="1w4-y2-zBs" secondAttribute="centerX" id="d25-Ao-IlB"/>
+                            <constraint firstItem="b4W-Se-p5h" firstAttribute="top" secondItem="cCH-Wq-5XK" secondAttribute="bottom" constant="8" symbolic="YES" id="rMI-5x-nxh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9g2-A9-g2x"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Privacy Policy" id="iO9-WF-OUp"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lrf-IY-t8p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="omV-4f-5g1" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2105.625" y="874.64788732394368"/>
         </scene>
     </scenes>
 </document>

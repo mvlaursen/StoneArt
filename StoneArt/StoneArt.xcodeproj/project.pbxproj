@@ -48,7 +48,7 @@
 		3B4894D7231DAE43003212F1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		3B5148022391BA4F00F17937 /* SavedGame.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SavedGame.xcdatamodel; sourceTree = "<group>"; };
 		3B5148082393388F00F17937 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		3BBD159D23173D860086757A /* StoneArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoneArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BBD159D23173D860086757A /* Go Stone Art.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Go Stone Art.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BBD15A023173D860086757A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BBD15A223173D860086757A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3BBD15A523173D860086757A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 		3BBD159E23173D860086757A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3BBD159D23173D860086757A /* StoneArt.app */,
+				3BBD159D23173D860086757A /* Go Stone Art.app */,
 				3BBD15B123173D870086757A /* StoneArtTests.xctest */,
 				3BBD15BC23173D870086757A /* StoneArtUITests.xctest */,
 			);
@@ -200,7 +200,7 @@
 			);
 			name = StoneArt;
 			productName = StoneArt;
-			productReference = 3BBD159D23173D860086757A /* StoneArt.app */;
+			productReference = 3BBD159D23173D860086757A /* Go Stone Art.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3BBD15B023173D870086757A /* StoneArtTests */ = {
@@ -497,7 +497,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 7.3.0;
 				DEVELOPMENT_TEAM = NM9E6W7574;
 				INFOPLIST_FILE = StoneArt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -507,7 +507,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appamajigger.StoneArt;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Go Stone Art";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -518,7 +518,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 7.3.0;
 				DEVELOPMENT_TEAM = NM9E6W7574;
 				INFOPLIST_FILE = StoneArt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -528,7 +528,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.appamajigger.StoneArt;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Go Stone Art";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -551,7 +551,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StoneArt.app/StoneArt";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Go Stone Art.app/Go Stone Art";
 			};
 			name = Debug;
 		};
@@ -572,7 +572,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StoneArt.app/StoneArt";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Go Stone Art.app/Go Stone Art";
 			};
 			name = Release;
 		};
@@ -626,7 +626,7 @@
 				3BBD15C423173D870086757A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		3BBD15C523173D870086757A /* Build configuration list for PBXNativeTarget "StoneArt" */ = {
 			isa = XCConfigurationList;
@@ -635,7 +635,7 @@
 				3BBD15C723173D870086757A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		3BBD15C823173D870086757A /* Build configuration list for PBXNativeTarget "StoneArtTests" */ = {
 			isa = XCConfigurationList;
@@ -644,7 +644,7 @@
 				3BBD15CA23173D870086757A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		3BBD15CB23173D870086757A /* Build configuration list for PBXNativeTarget "StoneArtUITests" */ = {
 			isa = XCConfigurationList;
@@ -653,7 +653,7 @@
 				3BBD15CD23173D870086757A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 
