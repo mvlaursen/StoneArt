@@ -30,6 +30,10 @@ class ViewController: UIViewController {
         boardView.resetForNewGame()
     }
     
+    @IBAction func snapshot(_ sender: UIButton) {
+
+    }
+    
     @IBAction func undoMove(_ sender: UIButton) {
         self.game.undoMostRecentMove()
         game.saveGame(persistentContext: persistentContext())

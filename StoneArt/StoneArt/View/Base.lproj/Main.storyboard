@@ -81,9 +81,19 @@
                                             <action selector="undoMove:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BW5-ul-zhC"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1q-l8-VWn" userLabel="Snapshot">
+                                        <rect key="frame" x="22" y="0.0" width="46" height="30"/>
+                                        <state key="normal" title="Snapshot">
+                                            <color key="titleColor" red="1" green="0.89019607840000003" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="snapshot:" destination="BYZ-38-t0r" eventType="touchUpInside" id="npb-V0-VBK"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="h5X-xN-pDT" firstAttribute="width" secondItem="nDk-as-NeV" secondAttribute="width" id="9JF-Ai-jq7"/>
+                                    <constraint firstItem="h5X-xN-pDT" firstAttribute="width" secondItem="S1q-l8-VWn" secondAttribute="width" id="p9k-z0-oVK"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lV6-lx-dKT">
