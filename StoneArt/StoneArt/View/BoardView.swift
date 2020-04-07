@@ -332,5 +332,19 @@ class BoardView: SKView {
             }
         }
     }
+    
+    // MARK: Miscellaneous
+    
+    func savePhoto() {
+        UIGraphicsBeginImageContext(self.bounds.size)
+        self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let validImage = image else {
+            return
+        }
+        UIImageWriteToSavedPhotosAlbum(validImage, nil, nil, nil)
+    }
 }
 

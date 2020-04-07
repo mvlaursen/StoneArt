@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func snapshot(_ sender: UIButton) {
-
+        boardView.savePhoto()
     }
     
     @IBAction func undoMove(_ sender: UIButton) {
