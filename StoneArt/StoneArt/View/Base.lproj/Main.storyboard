@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
@@ -14,7 +14,7 @@
             <objects>
                 <viewController title="Main" id="BYZ-38-t0r" customClass="ViewController" customModule="Go_Stone_Art" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go Stone Art" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="PdK-cH-DLl" userLabel="Title Label">
@@ -82,17 +82,46 @@
                                             <action selector="undoMove:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BW5-ul-zhC"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1q-l8-VWn" userLabel="Snapshot">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1q-l8-VWn" userLabel="Snapshot wC">
                                         <rect key="frame" x="33" y="3" width="24" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" image="camera">
+                                        <state key="normal" image="Camera24">
                                             <color key="titleColor" red="1" green="0.89019607840000003" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="snapshot:" destination="BYZ-38-t0r" eventType="touchUpInside" id="npb-V0-VBK"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lfp-JR-Uvx" userLabel="Snapshot wR">
+                                        <rect key="frame" x="75" y="3" width="48" height="48"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        <state key="normal" image="Camera48">
+                                            <color key="titleColor" red="1" green="0.89019607840000003" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="snapshot:" destination="BYZ-38-t0r" eventType="touchUpInside" id="atc-at-Vxk"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="S1q-l8-VWn"/>
+                                        <exclude reference="lfp-JR-Uvx"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="S1q-l8-VWn"/>
+                                        <exclude reference="lfp-JR-Uvx"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=regular">
+                                    <mask key="subviews">
+                                        <exclude reference="S1q-l8-VWn"/>
+                                        <include reference="lfp-JR-Uvx"/>
+                                    </mask>
+                                </variation>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lV6-lx-dKT">
                                 <rect key="frame" x="126.5" y="524" width="67" height="24"/>
@@ -135,17 +164,17 @@
             <objects>
                 <viewController title="Privacy Policy" id="KWL-6C-YCS" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1w4-y2-zBs">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01r-Pr-AVK">
-                                <rect key="frame" x="92" y="20" width="136.5" height="26.5"/>
+                                <rect key="frame" x="138.66666666666669" y="20" width="136.66666666666669" height="26.666666666666671"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="24"/>
                                 <color key="textColor" red="1" green="0.89019607840000003" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cCH-Wq-5XK">
-                                <rect key="frame" x="16" y="54.5" width="288" height="434.5"/>
+                                <rect key="frame" x="16" y="54.666666666666686" width="382" height="694.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <string key="text">Go Stone Art is a simple iOS app, intended as casual entertainment for children. It does not ask you or your child for any personal information nor collect any personal information. Appamajigger cannot look at nor collect any pictures drawn in Go Stone Art.
 
@@ -155,7 +184,7 @@ Go Stone Art does collect information for purposes of app maintenance and bug fi
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4W-Se-p5h">
-                                <rect key="frame" x="142.5" y="497" width="35" height="31"/>
+                                <rect key="frame" x="189.66666666666666" y="757" width="35" height="31"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
                                 <state key="normal" title="Close">
                                     <color key="titleColor" red="1" green="0.89019607840000003" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -187,6 +216,7 @@ Go Stone Art does collect information for purposes of app maintenance and bug fi
         </scene>
     </scenes>
     <resources>
-        <image name="camera" width="24" height="24"/>
+        <image name="Camera24" width="24" height="24"/>
+        <image name="Camera48" width="48" height="48"/>
     </resources>
 </document>
