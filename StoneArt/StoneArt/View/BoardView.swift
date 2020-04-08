@@ -335,7 +335,7 @@ class BoardView: SKView {
     
     // MARK: Miscellaneous
     
-    @objc private func savePhotoCompletion(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+    @objc private func savePhotoCompletion(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
         // TODO: Define "OK" in some standard place. Or get it from some Apple API.
         // TODO: Can code -3310 be gotten from some Apple API?
         // TODO: Shouldn't show alert for successful photo save, only for error.
@@ -370,7 +370,7 @@ class BoardView: SKView {
         guard let validImage = image else {
             return
         }
-        UIImageWriteToSavedPhotosAlbum(validImage, self, #selector(savePhotoCompletion(_:didFinishSavingWithError:contextInfo:)), nil)
+        UIImageWriteToSavedPhotosAlbum(validImage, self, #selector(savePhotoCompletion(image:didFinishSavingWithError:contextInfo:)), nil)
     }
 }
 
