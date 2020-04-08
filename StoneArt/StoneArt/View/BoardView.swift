@@ -339,7 +339,6 @@ class BoardView: SKView {
         // TODO: Can code -3310 be gotten from some Apple API?
         // TODO: Shouldn't show alert for successful photo save, only for error.
         // TODO: For -3310, offer to open the Settings.
-        // TODO: If user goes to Home screen, dismiss alert.
         
         var alertMessage = "A photo of your art has been saved to your photo library."
         var alertTitle = "Photo Saved"
