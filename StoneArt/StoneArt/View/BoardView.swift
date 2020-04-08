@@ -3,7 +3,7 @@
 //  StoneArt
 //
 //  Created by Mike Laursen on 8/29/19.
-//  Copyright © 2019 Appamajigger. All rights reserved.
+//  Copyright © 2020 Appamajigger. All rights reserved.
 //
 
 import SpriteKit
@@ -336,13 +336,11 @@ class BoardView: SKView {
     // MARK: Miscellaneous
     
     @objc private func savePhotoCompletion(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
-        // TODO: Define "OK" in some standard place. Or get it from some Apple API.
         // TODO: Can code -3310 be gotten from some Apple API?
         // TODO: Shouldn't show alert for successful photo save, only for error.
         // TODO: For -3310, offer to open the Settings.
         // TODO: If user goes to Home screen, dismiss alert.
         
-        let alertButtonLabel = "OK"
         var alertMessage = "A photo of your art has been saved to your photo library."
         var alertTitle = "Photo Saved"
         
@@ -354,11 +352,8 @@ class BoardView: SKView {
                 alertMessage = error.localizedDescription
             }
         }
-
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: alertButtonLabel, style: .default, handler: nil)
-        alertController.addAction(alertAction)
-        self.window?.rootViewController?.present(alertController, animated: true)
+        
+        self.window?.rootViewController?.alertWithOKAction(title: alertTitle, message: alertMessage)
     }
 
     func savePhoto() {

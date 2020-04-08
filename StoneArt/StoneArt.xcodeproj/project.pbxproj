@@ -22,6 +22,7 @@
 		3BBD15C123173D870086757A /* StoneArtUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBD15C023173D870086757A /* StoneArtUITests.swift */; };
 		3BBD15D0231740970086757A /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBD15CF231740970086757A /* SpriteKit.framework */; };
 		3BC2CE51239EE1EE00AB6C26 /* Game+Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC2CE50239EE1EE00AB6C26 /* Game+Persistence.swift */; };
+		3BF5AFC4243D76CC005EEBE0 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5AFC3243D76CC005EEBE0 /* UIViewController+Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		3BBD15C223173D870086757A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BBD15CF231740970086757A /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		3BC2CE50239EE1EE00AB6C26 /* Game+Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Game+Persistence.swift"; sourceTree = "<group>"; };
+		3BF5AFC3243D76CC005EEBE0 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				3BBD15A923173D870086757A /* LaunchScreen.storyboard */,
 				3BBD15A423173D860086757A /* Main.storyboard */,
 				3B4894CD23188EA8003212F1 /* BoardView.swift */,
+				3BF5AFC3243D76CC005EEBE0 /* UIViewController+Alert.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BF5AFC4243D76CC005EEBE0 /* UIViewController+Alert.swift in Sources */,
 				3B4894D4231DA861003212F1 /* Square.swift in Sources */,
 				3B4894D8231DAE43003212F1 /* Game.swift in Sources */,
 				3B51480A239360F800F17937 /* SavedGame.xcdatamodeld in Sources */,
