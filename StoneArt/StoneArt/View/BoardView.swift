@@ -337,7 +337,6 @@ class BoardView: SKView {
     
     @objc private func savePhotoCompletion(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
         // TODO: Can code -3310 be gotten from some Apple API?
-        // TODO: Shouldn't show alert for successful photo save, only for error.
         // TODO: For -3310, offer to open the Settings.
         
         var alertMessage = "A photo of your art has been saved to your photo library."
@@ -349,13 +348,17 @@ class BoardView: SKView {
             alertTitle = "Photo Not Saved"
             if error.domain == "ALAssetsLibraryErrorDomain" && error.code == -3310 {
                 alertMessage = "This app does not have permission to save photos to your photo library."
+                self.window?.rootViewController?.alertWithSettingsAndOKActions(title: alertTitle, message: alertMessage)
+
             } else {
                 alertMessage = error.localizedDescription
+                self.window?.rootViewController?.alertWithOKActionAndOptionalTimeout(title: alertTitle, message: alertMessage, timeout: nil)
             }
-        }
+        } else {
+            self.window?.rootViewController?.alertWithOKActionAndOptionalTimeout(title: alertTitle, message: alertMessage, timeout: alertTimeout)
 
-        self.window?.rootViewController?.alertWithOKActionAndOptionalTimeout(title: alertTitle, message: alertMessage, timeout: alertTimeout)
-    }
+        }
+     }
 
     func savePhoto() {
         UIGraphicsBeginImageContext(self.bounds.size)

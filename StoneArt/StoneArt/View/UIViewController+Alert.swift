@@ -29,6 +29,18 @@ extension UIViewController {
         }
     }
     
+    func alertWithSettingsAndOKActions(title: String, message: String) {
+        let alertController = AlertControllerWithResignActiveObservation(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Settings", style: .default, handler: {
+                _ in
+                if let url = URL.init(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+        }))
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertController, animated: true)
+    }
+    
     func alertWithOKActionAndOptionalTimeout(title: String, message: String, timeout: TimeInterval? = nil) {
         let alertController = AlertControllerWithResignActiveObservation(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
