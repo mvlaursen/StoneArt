@@ -29,7 +29,7 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Go Stone Art can save photos of your art to your photo library.</string>
+	<string>Go Stone Art can add photos of your art to your photo library.</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

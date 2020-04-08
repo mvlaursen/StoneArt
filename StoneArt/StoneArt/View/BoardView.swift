@@ -20,6 +20,13 @@ class BoardView: SKView {
     static let kStoneHaloZPosition = CGFloat(200.0)
     static let kStoneZPosition = CGFloat(250.0)
     static let kTapTolerance = CGFloat(2.5)
+    
+    static let kALAssetsLibraryErrorDomain = "ALAssetsLibraryErrorDomain"
+    static let kALAssetsLibraryDataUnavailableError = -3310
+    static let kPhotoAddedMessage = "A photo of your art has been added to your photo library."
+    static let kPhotoAddedTitle = "Photo Added"
+    static let kPhotoNotAddedNotAllowedMessage = "This app does not have permission to save photos to your photo library."
+    static let kPhotoNotAddedTitle = "Photo Not Added"
 
     let boardSceneDelegate = BoardSceneDelegate()
     
@@ -333,29 +340,24 @@ class BoardView: SKView {
         }
     }
     
-    // MARK: Miscellaneous
+    // MARK: Capturing Photos
     
     @objc private func savePhotoCompletion(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
-        // TODO: Can code -3310 be gotten from some Apple API?
-        // TODO: For -3310, offer to open the Settings.
-        
-        var alertMessage = "A photo of your art has been saved to your photo library."
-        var alertTimeout: TimeInterval? = 5
-        var alertTitle = "Photo Saved"
-        
+                
         if let error = error {
-            alertTimeout = nil
-            alertTitle = "Photo Not Saved"
-            if error.domain == "ALAssetsLibraryErrorDomain" && error.code == -3310 {
-                alertMessage = "This app does not have permission to save photos to your photo library."
-                self.window?.rootViewController?.alertWithSettingsAndOKActions(title: alertTitle, message: alertMessage)
+            // The ALAssetsLibrary "Data unavailable" error is what we see when
+            // the user has not granted this app permission to add photos to
+            // the photo library. Apple's documentation says ALAssetsLibrary
+            // framework is deprecated, but it still seems to be involved under
+            // the hood.
+            if error.domain == BoardView.kALAssetsLibraryErrorDomain && error.code == BoardView.kALAssetsLibraryDataUnavailableError {
+                self.window?.rootViewController?.alertWithSettingsAndOKActions(title: BoardView.kPhotoNotAddedTitle, message: BoardView.kPhotoNotAddedNotAllowedMessage)
 
             } else {
-                alertMessage = error.localizedDescription
-                self.window?.rootViewController?.alertWithOKActionAndOptionalTimeout(title: alertTitle, message: alertMessage, timeout: nil)
+                self.window?.rootViewController?.alertWithOKActionAndOptionalTimeout(title: BoardView.kPhotoNotAddedTitle, message: error.localizedDescription, timeout: nil)
             }
         } else {
-            self.window?.rootViewController?.alertWithOKActionAndOptionalTimeout(title: alertTitle, message: alertMessage, timeout: alertTimeout)
+            self.window?.rootViewController?.alertWithOKActionAndOptionalTimeout(title: BoardView.kPhotoAddedTitle, message: BoardView.kPhotoAddedMessage, timeout: 5)
 
         }
      }
