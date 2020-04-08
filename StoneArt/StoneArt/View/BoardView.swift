@@ -341,9 +341,11 @@ class BoardView: SKView {
         // TODO: For -3310, offer to open the Settings.
         
         var alertMessage = "A photo of your art has been saved to your photo library."
+        var alertTimeout: TimeInterval? = 5
         var alertTitle = "Photo Saved"
         
         if let error = error {
+            alertTimeout = nil
             alertTitle = "Photo Not Saved"
             if error.domain == "ALAssetsLibraryErrorDomain" && error.code == -3310 {
                 alertMessage = "This app does not have permission to save photos to your photo library."
@@ -351,8 +353,8 @@ class BoardView: SKView {
                 alertMessage = error.localizedDescription
             }
         }
-        
-        self.window?.rootViewController?.alertWithOKAction(title: alertTitle, message: alertMessage)
+
+        self.window?.rootViewController?.alertWithOKActionAndOptionalTimeout(title: alertTitle, message: alertMessage, timeout: alertTimeout)
     }
 
     func savePhoto() {

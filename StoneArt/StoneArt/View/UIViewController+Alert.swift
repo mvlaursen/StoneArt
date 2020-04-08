@@ -29,9 +29,14 @@ extension UIViewController {
         }
     }
     
-    func alertWithOKAction(title: String, message: String) {
+    func alertWithOKActionAndOptionalTimeout(title: String, message: String, timeout: TimeInterval? = nil) {
         let alertController = AlertControllerWithResignActiveObservation(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        if let timeout = timeout {
+            Timer.scheduledTimer(withTimeInterval: timeout, repeats: false, block: { (_) in
+                self.dismiss(animated: true, completion: nil)
+            })
+        }
         self.present(alertController, animated: true)
     }
 }
