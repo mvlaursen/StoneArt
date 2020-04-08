@@ -335,6 +335,32 @@ class BoardView: SKView {
     
     // MARK: Miscellaneous
     
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        // TODO: Define "OK" in some standard place. Or get it from some Apple API.
+        // TODO: Can code -3310 be gotten from some Apple API?
+        // TODO: Shouldn't show alert for successful photo save, only for error.
+        // TODO: For -3310, offer to open the Settings.
+        // TODO: If user goes to Home screen, dismiss alert.
+        
+        let alertButtonLabel = "OK"
+        var alertMessage = "A photo of your art has been saved to your photo library."
+        var alertTitle = "Photo Saved"
+        
+        if let error = error {
+            alertTitle = "Photo Not Saved"
+            if error.domain == "ALAssetsLibraryErrorDomain" && error.code == -3310 {
+                alertMessage = "This app does not have permission to save photos to your photo library."
+            } else {
+                alertMessage = error.localizedDescription
+            }
+        }
+
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: alertButtonLabel, style: .default, handler: nil)
+        alertController.addAction(alertAction)
+        self.window?.rootViewController?.present(alertController, animated: true)
+    }
+
     func savePhoto() {
         UIGraphicsBeginImageContext(self.bounds.size)
         self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
@@ -344,7 +370,7 @@ class BoardView: SKView {
         guard let validImage = image else {
             return
         }
-        UIImageWriteToSavedPhotosAlbum(validImage, nil, nil, nil)
+        UIImageWriteToSavedPhotosAlbum(validImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
 }
 
