@@ -367,10 +367,9 @@ class BoardView: SKView {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        guard let validImage = image else {
-            return
+        if let image = image {
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(savePhotoCompletion(image:didFinishSavingWithError:contextInfo:)), nil)
         }
-        UIImageWriteToSavedPhotosAlbum(validImage, self, #selector(savePhotoCompletion(image:didFinishSavingWithError:contextInfo:)), nil)
     }
 }
 
