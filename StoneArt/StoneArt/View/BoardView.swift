@@ -3,7 +3,7 @@
 //  StoneArt
 //
 //  Created by Mike Laursen on 8/29/19.
-//  Copyright © 2019 Appamajigger. All rights reserved.
+//  Copyright © 2020 Appamajigger. All rights reserved.
 //
 
 import SpriteKit
@@ -20,6 +20,13 @@ class BoardView: SKView {
     static let kStoneHaloZPosition = CGFloat(200.0)
     static let kStoneZPosition = CGFloat(250.0)
     static let kTapTolerance = CGFloat(2.5)
+    
+    static let kALAssetsLibraryErrorDomain = "ALAssetsLibraryErrorDomain"
+    static let kALAssetsLibraryDataUnavailableError = -3310
+    static let kPhotoAddedMessage = "A photo of your art has been added to your photo library."
+    static let kPhotoAddedTitle = "Photo Added"
+    static let kPhotoNotAddedNotAllowedMessage = "This app does not have permission to save photos to your photo library."
+    static let kPhotoNotAddedTitle = "Photo Not Added"
 
     let boardSceneDelegate = BoardSceneDelegate()
     
@@ -330,6 +337,39 @@ class BoardView: SKView {
                     }
                 }
             }
+        }
+    }
+    
+    // MARK: Capturing Photos
+    
+    @objc private func savePhotoCompletion(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+                
+        if let error = error {
+            // The ALAssetsLibrary "Data unavailable" error is what we see when
+            // the user has not granted this app permission to add photos to
+            // the photo library. Apple's documentation says ALAssetsLibrary
+            // framework is deprecated, but it still seems to be involved under
+            // the hood.
+            if error.domain == BoardView.kALAssetsLibraryErrorDomain && error.code == BoardView.kALAssetsLibraryDataUnavailableError {
+                self.window?.rootViewController?.alertWithSettingsAndOKActions(title: BoardView.kPhotoNotAddedTitle, message: BoardView.kPhotoNotAddedNotAllowedMessage)
+
+            } else {
+                self.window?.rootViewController?.alertWithOKActionAndOptionalTimeout(title: BoardView.kPhotoNotAddedTitle, message: error.localizedDescription, timeout: nil)
+            }
+        } else {
+            self.window?.rootViewController?.alertWithOKActionAndOptionalTimeout(title: BoardView.kPhotoAddedTitle, message: BoardView.kPhotoAddedMessage, timeout: 5)
+
+        }
+     }
+
+    func savePhoto() {
+        UIGraphicsBeginImageContext(self.bounds.size)
+        self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        if let image = image {
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(savePhotoCompletion(image:didFinishSavingWithError:contextInfo:)), nil)
         }
     }
 }
