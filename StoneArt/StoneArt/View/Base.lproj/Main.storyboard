@@ -125,7 +125,7 @@
                                 </variation>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lV6-lx-dKT">
-                                <rect key="frame" x="478.5" y="1302" width="67" height="24"/>
+                                <rect key="frame" x="925" y="1302" width="67" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <state key="normal" title="Privacy Policy">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -137,6 +137,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lV6-lx-dKT" secondAttribute="trailing" constant="32" id="6dR-o1-2KP"/>
                             <constraint firstItem="qRR-2u-Cn9" firstAttribute="centerX" secondItem="IWt-LL-KVg" secondAttribute="centerX" id="9zd-WE-L3h"/>
                             <constraint firstItem="IWt-LL-KVg" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="INL-Gq-c5V"/>
                             <constraint firstItem="PdK-cH-DLl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OJa-gx-NiB"/>
@@ -153,6 +154,22 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PdK-cH-DLl" secondAttribute="trailing" id="yKz-MV-x5e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="6dR-o1-2KP"/>
+                                <exclude reference="YGD-Nq-qQo"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="YGD-Nq-qQo"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="6dR-o1-2KP"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="wCA-Ya-XgX"/>
                 </viewController>

@@ -202,6 +202,8 @@ class BoardView: SKView {
             return BoardMetrics(boardImageName: "StoneArtBoard1024", squareDim: 64.0, stoneImageName: [.black: "BlackStone60", .blue: "BlueStone60", .brown: "BrownStone60", .cyan: "CyanStone60", .green: "GreenStone60", .magenta: "MagentaStone60", .orange: "OrangeStone60", .red: "RedStone60", .white: "WhiteStone60", .yellow: "YellowStone60"])
         } else if width.isEqual(to: 834.0) {
             return BoardMetrics(boardImageName: "StoneArtBoard768", squareDim: 48.0, stoneImageName: [.black: "BlackStone45", .blue: "BlueStone45", .brown: "BrownStone45", .cyan: "CyanStone45", .green: "GreenStone45", .magenta: "MagentaStone45", .orange: "OrangeStone45", .red: "RedStone45", .white: "WhiteStone45", .yellow: "YellowStone45"])
+        } else if width.isEqual(to: 810.0) {
+            return BoardMetrics(boardImageName: "StoneArtBoard768", squareDim: 48.0, stoneImageName: [.black: "BlackStone45", .blue: "BlueStone45", .brown: "BrownStone45", .cyan: "CyanStone45", .green: "GreenStone45", .magenta: "MagentaStone45", .orange: "OrangeStone45", .red: "RedStone45", .white: "WhiteStone45", .yellow: "YellowStone45"])
         } else {
             return BoardMetrics(boardImageName: "StoneArtBoard320", squareDim: 20.0, stoneImageName: [.black: "BlackStone18", .blue: "BlueStone18", .brown: "BrownStone18", .cyan: "CyanStone18", .green: "GreenStone18", .magenta: "MagentaStone18", .orange: "OrangeStone18", .red: "RedStone18", .white: "WhiteStone18", .yellow: "YellowStone18"])
         }
